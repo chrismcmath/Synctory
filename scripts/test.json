@@ -1,0 +1,14 @@
+{
+    "title": "A title",
+    "author": "An author",
+    "units": [
+        {
+            "location": "loc1",
+            "characters": [
+                "char1",
+                "char2"
+            ],
+            "text": "some fountain text here"
+        }
+    ]
+}
