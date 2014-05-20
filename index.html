@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
+		
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -24,6 +25,40 @@
         <!-- Add your site or application content here -->
         <div id="container">
             <div id="time_scrub">
+                <div id="time_scrub_container" class="scroller"> //adding any random class here will stop it scrolling (????)
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                    <div class="time_unit">
+                    </div>
+                </div>
             </div>
             <div id="columns">
                 <div class="column empty_column">
@@ -141,6 +176,20 @@ Etiam vehicula leo nec nibh ornare lobortis. Suspendisse sodales, ante nec pelle
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+    <script>
+			var intOverallDelta = 0;
+				
+			$("#divScroll").mousewheel(function(objEvent, intDelta){
+			    if (intDelta > 0){
+			       intOverallDelta++;
+				   $("#divScroll").html('up - (' + intOverallDelta + ')');
+				}
+			    else if (intDelta < 0){
+					intOverallDelta--;
+			       $("#divScroll").html('down - (' +  intOverallDelta + ')');
+				}
+			});
+    </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
