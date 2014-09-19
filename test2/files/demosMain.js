@@ -32,6 +32,23 @@ var Page = {
             },750);
         }
 
+        var demoTwo = new ScrollSpy({
+            min: 0, // acts as position-x: absolute; left: 50px;
+            mode: 'vertical',
+            onEnter: function(position,enters) {
+
+            },
+            onLeave: function(position,leaves) {
+
+            },
+            onTick: function(position,state,enters,leaves) {
+                $$(".location_title").each(function(title)  {
+                    title.style.top = position.y+"px";
+                }); 
+            },
+            container: window
+        }); 
+
         var demoThree= new ScrollSpy({
             min: 0, // acts as position-y: absolute; bottom: 50px;
             mode: 'vertical',
@@ -42,7 +59,7 @@ var Page = {
 
             },
             onTick: function(position,state,enters,leaves) {
-                $("DemoItem3").style.top = -position.y+170+"px";
+                $("step_panel").style.top = -position.y+170+"px";
             },
             container: window
         }); 
