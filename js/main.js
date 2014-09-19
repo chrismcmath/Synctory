@@ -74,6 +74,7 @@ function handleFileSelect(evt) {
 document.getElementById('file').addEventListener('change', handleFileSelect, false);
 
 
+/* This looks like the scrolling functionality*/
 var intOverallDelta = 0;
 
 $("#container").bind('mousewheel', function(e){
@@ -96,7 +97,7 @@ $("#container").bind('mousewheel', function(e){
  * @param {Object} up
  * @param {Object} down
  * @param {Object} preventDefault
- */
+ *
 jQuery.fn.extend({
     mousewheel: function(up, down, preventDefault) {
         return this.hover(
@@ -166,3 +167,4 @@ jQuery.event.mousewheel = {
         el._handleMousewheel = null;
     }
 };
+*/
