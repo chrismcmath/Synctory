@@ -34,7 +34,6 @@ top: 0px;
 }
 
 #logo{
-	background-image:url(images/logo.png);
 	background-position:0 0;
 	height:108px;
 	left:50px;
@@ -90,20 +89,17 @@ h1{
 .leftTab, .rightTab{
 	display: inline-block;
 	width: 17px;
-	background-image: url("images/leftTabDarker.png");
 	height: 26px;
 	margin: 0px;
 	float: left;
 }
 
 .rightTab{
-		background-image: url("images/rightTabDarker.png");
 }
 
 .midTab{
 	display: inline-block;
 	width: 17px;
-	background-image: url("images/midTabDarker.png");
 	height: 26px;
 	margin: 0px;
 	min-width: 200px;

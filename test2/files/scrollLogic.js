@@ -1,22 +1,6 @@
 var Page = {
     initialize: function() {
         // nice one David Walsh	(via rickyh.co.uk)
-        var ss = new ScrollSpy({
-            min: 0,
-        mode: 'vertical',
-        onEnter: function(position,enters) {
-
-        },
-        onLeave: function(position,leaves) {
-
-        },
-        onTick: function(position,state,enters,leaves) {
-            $("head").style.top = -position.y+"px";
-        },
-        container: window
-        }); 
-
-
 
         if($("footerTab")){
             $("footerTab").set('morph', {
@@ -32,7 +16,7 @@ var Page = {
             },750);
         }
 
-        var demoTwo = new ScrollSpy({
+        var locationTitles = new ScrollSpy({
             min: 0, // acts as position-x: absolute; left: 50px;
             mode: 'vertical',
             onEnter: function(position,enters) {
@@ -49,7 +33,7 @@ var Page = {
             container: window
         }); 
 
-        var demoThree= new ScrollSpy({
+        var stepPanel = new ScrollSpy({
             min: 0, // acts as position-y: absolute; bottom: 50px;
             mode: 'vertical',
             onEnter: function(position,enters) {
