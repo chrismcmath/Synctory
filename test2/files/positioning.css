@@ -3,6 +3,7 @@
     width: 100%;
     background: red;
     position: fixed;
+    top: 0px;
     z-index: 2;
 }
 
@@ -17,59 +18,62 @@
 #locations{
     color:#212121;
     font-size:72px;
-    padding-bottom:50px;
-    padding-left:50px;
-    padding-right:50px;
-    padding-top:50px;
-    text-shadow:1px 1px 0 #444444;
     width:3000px;
+    margin-left:100px;
+    margin-top:35px;
 }
 
 .location {
+    position: relative;
     display: inline-block;
     vertical-align: top;
     width: 350px;
     height: 100%;
-
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .location_title {
-    position: relative;
-    top: 370px;
-    left: 50px;
-    width: 200px;
-    height: 50px;
+    position: absolute;
     background: #1f1f1f;
-    padding: 20px;
+    padding: 5px;
     color: #fff;
+    text-shadow:1px 1px 0 #444444;
     border-top: 1px solid #444;
     border-left: 1px solid #444;
     border-right: 1px solid #111;
     border-bottom: 1px solid #111;
-
-
     font-size: 12px;
 }
 
-#DemoItem1, #step_panel {
+#step_panel {
     position: fixed;
-    top: 370px;
-    left: 50px;
-    width: 200px;
-    height: 50px;
+    width: 100px;
+    height: 1000px;
     background: #1f1f1f;
-    padding: 20px;
     color: #fff;
-    border-top: 1px solid #444;
-    border-left: 1px solid #444;
-    border-right: 1px solid #111;
-    border-bottom: 1px solid #111;
+    margin-top: 35px;
+    z-index: 1;
 }
 
-.location_title{
-    top: 270px;
+.unit {
+    background: #fff;
+    box-shadow: 2px 2px 1px #555;
+    width:100%;
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-top: 10px;
 }
-#step_panel{
-    top: 170px;
-}   
 
+.unit textarea{
+    /*border: 1px solid gray;*/
+    outline: none;
+    border: 0;
+    width: 100%;
+    font-family: courier;
+    font-size:15px;
+    padding: 0;
+    margin-top: 5px;
+    resize:none;
+    overflow: hidden;
+}

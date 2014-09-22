@@ -43,7 +43,7 @@ var Page = {
 
             },
             onTick: function(position,state,enters,leaves) {
-                $("step_panel").style.top = -position.y+170+"px";
+                $("step_panel").style.top = -position.y+"px";
             },
             container: window
         }); 
