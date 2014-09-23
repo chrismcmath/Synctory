@@ -56,9 +56,30 @@
     z-index: 1;
 }
 
+.step {
+    position: absolute;
+    width: 100%;
+    min-height: 50px;
+    padding: 0;
+    margin: 0;
+    background-color: green;
+    margin-top: 10px;
+}
+
+.step_actions {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    bottom: 0px;
+    background-color: blue;
+}
+
 .unit {
     background: #fff;
     box-shadow: 2px 2px 1px #555;
+    min-height: 50px;
     width:100%;
     border-radius: 5px;
     margin-left: 20px;
