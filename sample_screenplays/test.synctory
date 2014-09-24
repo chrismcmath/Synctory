@@ -1,13 +1,34 @@
 {
     "title": "A title",
-    "author": "An author",
+    "author": "&",
+    "steps": [{
+        "key": 0,
+        "stamp": "START"
+    },{
+        "key": 1,
+        "stamp": "00:01:95"
+    }],
+    "locations": [{
+        "key": 0,
+        "name": "INT. HOUSE"
+    },{
+        "key": 1,
+        "name": "EXT. HOUSE"
+    }],
     "units": [{
-        "location": "loc1",
+        "location": "0",
         "start_step": 1,
-        "end_step": 1,
-        // or 
         "length": 1,
-        "characters": [
+        "entities": [
+            "BOBBY",
+            "RED CHAIR"
+        ],
+        "text": "The SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
+    },{
+        "location": "1",
+        "start_step": 1,
+        "length": 1,
+        "entities": [
             "char1",
             "char2"
         ],

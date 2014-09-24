@@ -8,7 +8,6 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 }
 
 function handleFileSelect(evt) {
-    console.log("handleFileSelect " + evt);
     var file = evt.target.files[0]; // FileList object
     var split_parts = file.name.split(".");
     console.log(" got " + file +
@@ -26,49 +25,88 @@ function handleFileSelect(evt) {
 
     var reader = new FileReader();
 
-    /*
-    console.log("before onload");
-      // Closure to capture the file information.
-      reader.onload = (function(theFile) {
-            console.log("in result");
-            var jsonString = reader.readAsText(theFile);
-            debugger;
-        return function(e) {
-            console.log("result: " + e.target.result);
-        };
-      })(file);
-    console.log("after onload");
-
-    */
-        // Closure to capture the file information.
+    // Closure to capture the file information.
     reader.onload = (function (theFile) {
         return function (e) { 
             JsonObj = e.target.result
             console.log(JsonObj);
             var parsedJSON = JSON.parse(JsonObj);
-            debugger;
-            //var x = parsedJSON['frames']['chaingun.png']['spriteSourceSize']['x'];
-            console.log(parsedJSON);
-
+            LoadScript(parsedJSON);
         };
     })(file);
 
     reader.readAsText(file, 'UTF-8');
+}
 
-    //var jObject = JSON.Parse(FileReader.readAsText(file
+function LoadScript(parsedJSON) {
+    var locationsJSON = parsedJSON.locations;
+    LoadScriptLocations(locationsJSON);
+    var unitsJSON = parsedJSON.units;
+    LoadScriptUnits(unitsJSON);
+    var stepsJSON = parsedJSON.steps;
+    LoadScriptSteps(stepsJSON);
+}
 
+function LoadScriptLocations(locationsJSON) {
+    var locations = []
+    $$('.location').dispose();
+    Array.each(locationsJSON, function(locationJSON, index) {
+        var location = new Location(
+                index,
+                locationJSON.name);
+        locations.push(location);
+        var locationDiv  = new Element("div", {
+            'class': 'location',
+            'id': 'location_' + location.Key
+        }); 
+        var titleDiv = new Element("div", {
+            text: location.Name,
+            'class': 'location_title'
+        });
+        $(locationDiv).adopt(titleDiv);
+        $('locations').adopt(locationDiv);
+    });
+}
 
-    // files is a FileList of File objects. List some properties.
-     /*
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-        output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                f.size, ' bytes, last modified: ',
-                f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-    */
+function LoadScriptUnits(unitsJSON) {
+    var units = []
+    Array.each(unitsJSON, function(unitJSON, index) {
+        var unit = new Unit(
+                index,
+                unitJSON.location,
+                unitJSON.start_step,
+                unitJSON.length,
+                unitJSON.entities,
+                unitJSON.text);
+        units.push(unit);
+    });
+    $$('.unit').dispose();
+    Array.each(units, function(unit, index) {
+        if ($(GetLocationIDFromKey(unit.LocationKey)) == null) {
+            alert('Could not find location with key ' + unit.LocationKey);
+            //CreateNewLocation(unit.LocationKey);
+        }
+        var unitDiv  = new Element("div", {
+            'class': 'unit',
+            'id': 'unit_' + unit.Key
+        }); 
+        var textDiv = new Element("textarea", {
+            text: unit.Text,
+            'class': 'flext growme'
+        });
+        unitDiv.adopt(textDiv);
+        $(GetLocationIDFromKey(unit.LocationKey)).adopt(unitDiv);
+        var flext = new Flext(textDiv); 
+
+        console.log("unit " + index + " height: " +  unitDiv.getScrollSize().y);
+    });
+}
+
+function LoadScriptSteps(stepsJSON) {
+}
+
+function GetLocationIDFromKey(key) {
+    return 'location_' + key;
 }
 
 document.getElementById('file').addEventListener('change', handleFileSelect, false);
