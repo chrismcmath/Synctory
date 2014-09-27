@@ -97,8 +97,10 @@ function LoadScriptUnits(unitsJSON) {
         unitDiv.adopt(textDiv);
         $(GetLocationIDFromKey(unit.LocationKey)).adopt(unitDiv);
         var flext = new Flext(textDiv); 
-
-        console.log("unit " + index + " height: " +  unitDiv.getScrollSize().y);
+        console.log("unit " + index);
+        console.log(" getScrollSize: " +  unitDiv.getScrollSize().y);
+        console.log("actual? " + (unitDiv.getScrollSize().y + flext.vertPadding));
+        console.log("GetUnitHeight " + GetUnitHeight(unitDiv, flext));
     });
 }
 
@@ -107,6 +109,15 @@ function LoadScriptSteps(stepsJSON) {
 
 function GetLocationIDFromKey(key) {
     return 'location_' + key;
+}
+
+function GetUnitHeight(container, flext) {
+    debugger;
+    var containerPadding = container.getStyle('padding-top').toInt()+container.getStyle('padding-bottom').toInt()+container.getStyle('border-top').toInt()+container.getStyle('border-bottom').toInt();
+    var textareaHeight = flext.el.getScrollSize().y + flext.vertPadding;
+    console.log("containerPadding " + containerPadding);
+    console.log("textareaHeight " + textareaHeight);
+    return containerPadding + textareaHeight;
 }
 
 document.getElementById('file').addEventListener('change', handleFileSelect, false);
