@@ -1,17 +1,15 @@
 var Unit = new Class({
-    initialize: function(key, locationKey, startStep, lastStep, entities, text, active) {
+    initialize: function(key, locationKey, steps, entities, text, active) {
         this.Key = key;
         this.LocationKey = locationKey;
-        this.StartStep = startStep;
-        this.LastStep = lastStep;
-        //this.Length = length;
+        this.Steps = steps;
         this.Entities = entities;
         this.Text = text;
         this.Active = active;
     },
 
-    GetLastStep: function() {
-        return this.StartStep + this.Length;
+    GetLastStepKey: function() {
+        return this.Steps.getLast();
     },
 
     GetBottomY: function() {
@@ -35,6 +33,8 @@ var Unit = new Class({
     },
 
     CreateActive: function() {
+        var unit = this;
+
         this.Div = new Element("div", {
             'class': 'unit clear_all',
         'id': 'unit_' + this.Key
@@ -53,9 +53,17 @@ var Unit = new Class({
             html: '&#247;',
             'class': 'split_unit unit_button'
         });
+        splitButton.addEvent('click', function(event){
+            event.stop();
+            unit.OnSplit();
+        });
         var closeButton = new Element("div", {
             html: '&#9679;',
             'class': 'close_unit unit_button'
+        });
+        closeButton.addEvent('click', function(event){
+            event.stop();
+            unit.OnClose();
         });
         header.adopt(headerDivide);
         header.adopt(splitButton);
@@ -67,16 +75,24 @@ var Unit = new Class({
             'class': 'unit_divide unit_divide_footer'
         });
         var shrinkButton = new Element("div", {
-            html: '+',
+            html: '-',
             'class': 'shrink_unit unit_button'
         });
+        shrinkButton.addEvent('click', function(event){
+            event.stop();
+            unit.OnShrink();
+        });
         var growButton = new Element("div", {
-            html: '-',
+            html: '+',
             'class': 'grow_unit unit_button'
         });
+        growButton.addEvent('click', function(event){
+            event.stop();
+            unit.OnGrow();
+        });
         footer.adopt(footerDivide);
-        footer.adopt(shrinkButton);
         footer.adopt(growButton);
+        footer.adopt(shrinkButton);
         this.Div.adopt(header);
         this.Div.adopt(this.TextDiv);
         this.Div.adopt(footer);
@@ -124,5 +140,31 @@ var Unit = new Class({
         //this.Div.setProperty('class', 'unit clear_all');
         this.TextDiv.value = this.Text;
         //jQuery(this.TextDiv).elastic();
+    },
+
+    OnSplit: function() {
+        debugger;
+        console.log('on Split');
+    },
+    OnClose: function() {
+        console.log('on Close');
+    },
+    OnShrink: function() {
+        console.log('on Shrink');
+    },
+    OnGrow: function() {
+        console.log('on Grow');
+        var terminalStep = GetStepFromKey(this.GetLastStepKey());
+        var nextStep = terminalStep.NextStep;
+        if (nextStep.RequestGrowth(this)) {
+            terminalStep.RemoveUnitTerminal(this);
+            this.Steps.push(nextStep.Key);
+
+            /* Hack - because step stamps are for when the step beings,
+             * but our logic is from when the step terminates,
+             * copy across the stamp here to make it look like it's the other one */
+            nextStep.SetStamp(terminalStep.Stamp);
+        }
+        Refresh();
     }
 });

@@ -30,8 +30,7 @@
     "units": [{
         "active": true,
         "location": "0",
-        "start_step": 0,
-        "last_step": 0,
+        "steps": [0],
         "entities": [
             "BOBBY",
             "RED CHAIR"
@@ -40,8 +39,7 @@
     },{
         "active": false,
         "location": "0",
-        "start_step": 1,
-        "last_step": 1,
+        "steps": [1],
         "entities": [
             "BOBBY",
             "RED CHAIR"
@@ -50,8 +48,7 @@
     },{
         "active": true,
         "location": "0",
-        "start_step": 2,
-        "last_step": 2,
+        "steps": [2],
         "entities": [
             "BOBBY",
             "RED CHAIR"
@@ -60,8 +57,7 @@
     },{
         "active": true,
         "location": "0",
-        "start_step": 3,
-        "last_step": 3,
+        "steps": [3],
         "entities": [
             "BOBBY",
             "RED CHAIR"
@@ -70,8 +66,7 @@
     },{
         "active": true,
         "location": "1",
-        "start_step": 0,
-        "last_step": 1,
+        "steps": [0,1],
         "entities": [
             "char1",
             "char2"
@@ -80,8 +75,7 @@
     },{
         "active": true,
         "location": "1",
-        "start_step": 2,
-        "last_step": 3,
+        "steps": [2,3],
         "entities": [
             "char1",
             "char2"
@@ -90,8 +84,7 @@
     },{
         "active": true,
         "location": "2",
-        "start_step": 0,
-        "last_step": 3,
+        "steps": [0,3],
         "entities": [
             "char1",
             "char2"

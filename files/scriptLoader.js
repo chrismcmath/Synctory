@@ -105,8 +105,7 @@ function LoadScriptUnits(unitsJSON) {
         var unit = new Unit(
                 index,
                 unitJSON.location,
-                unitJSON.start_step,
-                unitJSON.last_step,
+                unitJSON.steps,
                 unitJSON.entities,
                 unitJSON.text,
                 unitJSON.active);
@@ -127,11 +126,17 @@ function LoadScriptUnits(unitsJSON) {
 
 function LoadUnitsIntoScripts() {
     Array.each(units, function(unit, index) {
-        var stepKey = unit.LastStep;
-        var step = GetStepFromKey(stepKey);
-        console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
-        if (step != null) {
-            step.AddUnitTerminal(unit);
+        Array.each(unit.Steps, function(stepKey, index) {
+            var step = GetStepFromKey(stepKey);
+            console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
+            if (step != null) {
+                step.AddUnit(unit);
+            }
+        });
+        var terminalStepKey = unit.GetLastStepKey();
+        var lastStep = GetStepFromKey(terminalStepKey);
+        if (lastStep != null) {
+            lastStep.AddUnitTerminal(unit);
         }
     });
 }
@@ -177,8 +182,7 @@ function GetUnitJSON() {
     Array.each(units, function(unit, index) {
         var u = {};
         u.location = unit.LocationKey;
-        u.start_step = unit.StartStep;
-        u.last_step = unit.LastStep;
+        u.steps = unit.Steps;
         u.entites = unit.Entites;
         u.text = unit.TextDiv.value;
         unitJSON.push(u);

@@ -83,7 +83,7 @@
 
 .unit {
     background: #fff;
-    box-shadow: 2px 2px 1px #555;
+    //box-shadow: 2px 2px 1px #555; going for monochrome look;
     min-height: 100px;
     width:100%;
     border-radius: 5px;
@@ -110,6 +110,8 @@
 
 .unit_inactive {
     background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 .add_unit {
