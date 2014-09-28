@@ -1,3 +1,8 @@
+window.addEvent('domready', function() {
+    steps = [];
+    locations = [];
+    units = [];
+});
 
 function HandleFileSelect(evt) {
     LoadFile(evt.target.files[0]); // FileList object
@@ -25,6 +30,11 @@ function RefreshFrom(step_key) {
 
 function OnSaveClicked() {
     SaveFile();
+}
+
+function OnTextareaHeightChanged() {
+    //TODO: Make this only from the changed one
+    Refresh();
 }
 
 document.getElementById('file').addEventListener('change', HandleFileSelect, false);
