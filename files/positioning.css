@@ -22,7 +22,6 @@
 }
 
 #locations{
-    color:#212121;
     font-size:72px;
     width:3000px;
     margin-left:100px;
@@ -84,7 +83,7 @@
 .unit {
     background: #fff;
     box-shadow: 2px 2px 1px #555;
-    min-height: 50px;
+    min-height: 100px;
     width:100%;
     border-radius: 5px;
     margin-left: 20px;
@@ -102,4 +101,21 @@
     margin-top: 5px;
     resize:none;
     overflow: hidden;
+}
+
+.unit_inactive {
+    background: transparent;
+    position: relative;
+}
+
+.add_unit {
+    background: #ffdb4c;
+    position: absolute;
+    text-align: center;
+    font-size: 50px;
+    height: 50px;
+    width: 50px;
+    margin: -25px 0 0 -25px;
+    top: 50%;
+    left: 50%;
 }

@@ -108,7 +108,8 @@ function LoadScriptUnits(unitsJSON) {
                 unitJSON.start_step,
                 unitJSON.last_step,
                 unitJSON.entities,
-                unitJSON.text);
+                unitJSON.text,
+                unitJSON.active);
         units.push(unit);
     });
     $$('.unit').dispose();
@@ -117,20 +118,11 @@ function LoadScriptUnits(unitsJSON) {
             alert('Could not find location with key ' + unit.LocationKey);
             //CreateNewLocation(unit.LocationKey);
         }
-        unit.Div = new Element("div", {
-            'class': 'unit clear_all',
-            'id': 'unit_' + unit.Key
-        }); 
-        var textDiv = new Element("textarea", {
-            text: unit.Text,
-            'class': 'unit_script'
-        });
-        unit.Div.adopt(textDiv);
-        $(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
-
-        jQuery('.unit_script').elastic();
-        jQuery('.unit_script').trigger('update');
+        unit.CreateUnitHTML();
     });
+
+    jQuery('.unit_script').elastic();
+    jQuery('.unit_script').trigger('update');
 }
 
 function LoadUnitsIntoScripts() {
@@ -154,9 +146,8 @@ function SaveFile() {
 
     var jsonString = JSON.encode(jObj);
 
-    FileWriter jsonWriter = new FileWriter("written_file.synctory");
-    jsonArray.writeJSONString(jsonWriter);
-    jsonWriter.close();
+    var jsonBlob = new Blob([jsonString], {type: "text/plain;charset=utf-8"});
+    saveAs(jsonBlob, "blob_test.synctory");
 }
 
 function GetLocationJSON() {
@@ -189,7 +180,7 @@ function GetUnitJSON() {
         u.start_step = unit.StartStep;
         u.last_step = unit.LastStep;
         u.entites = unit.Entites;
-        u.text = unit.Text;
+        u.text = unit.TextDiv.value;
         unitJSON.push(u);
     });
     return unitJSON;

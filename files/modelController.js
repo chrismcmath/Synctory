@@ -13,6 +13,16 @@ function Refresh() {
     });
 }
 
+function RefreshFrom(step_key) {
+    if (steps == null) return;
+    
+    var step = steps[0]; //Assuming first step will always be at [0]
+    while (step != null) {
+        step.Reposition();
+        step = step.NextStep;
+    }
+}
+
 function OnSaveClicked() {
     SaveFile();
 }

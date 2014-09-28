@@ -13,9 +13,6 @@
     },{
         "key": 3,
         "stamp": "00:03:95"
-    },{
-        "key": 4,
-        "stamp": "LAST ONE"
     }],
     "locations": [{
         "key": 0,
@@ -28,7 +25,6 @@
         "name": "INT. SHED"
     }],
     "units": [{
-        "active": true,
         "location": "0",
         "start_step": 0,
         "last_step": 0,
@@ -38,7 +34,6 @@
         ],
         "text": "The SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
     },{
-        "active": false,
         "location": "0",
         "start_step": 1,
         "last_step": 1,
@@ -48,7 +43,6 @@
         ],
         "text": "The BLACK DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
     },{
-        "active": true,
         "location": "0",
         "start_step": 2,
         "last_step": 2,
@@ -58,7 +52,6 @@
         ],
         "text": "The BLACK DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
     },{
-        "active": true,
         "location": "0",
         "start_step": 3,
         "last_step": 3,
@@ -68,7 +61,6 @@
         ],
         "text": "The BLACK DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
     },{
-        "active": true,
         "location": "1",
         "start_step": 0,
         "last_step": 1,
@@ -78,7 +70,6 @@
         ],
         "text": "some fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hereeeeeeesome fountain text here"
     },{
-        "active": true,
         "location": "1",
         "start_step": 2,
         "last_step": 3,
@@ -88,7 +79,6 @@
         ],
         "text": "some fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hereeeeeeesome fountain text here"
     },{
-        "active": true,
         "location": "2",
         "start_step": 0,
         "last_step": 3,
