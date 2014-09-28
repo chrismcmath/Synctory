@@ -7,6 +7,12 @@
     },{
         "key": 1,
         "stamp": "00:01:95"
+    },{
+        "key": 2,
+        "stamp": "00:02:95"
+    },{
+        "key": 3,
+        "stamp": "00:03:95"
     }],
     "locations": [{
         "key": 0,
@@ -14,24 +20,72 @@
     },{
         "key": 1,
         "name": "EXT. HOUSE"
+    },{
+        "key": 2,
+        "name": "INT. SHED"
     }],
     "units": [{
         "location": "0",
-        "start_step": 1,
-        "length": 1,
+        "start_step": 0,
+        "last_step": 0,
         "entities": [
             "BOBBY",
             "RED CHAIR"
         ],
         "text": "The SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
     },{
-        "location": "1",
+        "location": "0",
         "start_step": 1,
-        "length": 1,
+        "last_step": 1,
+        "entities": [
+            "BOBBY",
+            "RED CHAIR"
+        ],
+        "text": "The BLACK DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
+    },{
+        "location": "0",
+        "start_step": 2,
+        "last_step": 2,
+        "entities": [
+            "BOBBY",
+            "RED CHAIR"
+        ],
+        "text": "The BLACK DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
+    },{
+        "location": "0",
+        "start_step": 3,
+        "last_step": 3,
+        "entities": [
+            "BOBBY",
+            "RED CHAIR"
+        ],
+        "text": "The BLACK DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?"
+    },{
+        "location": "1",
+        "start_step": 0,
+        "last_step": 1,
         "entities": [
             "char1",
             "char2"
         ],
-        "text": "some fountain text here"
+        "text": "some fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hereeeeeeesome fountain text here"
+    },{
+        "location": "1",
+        "start_step": 2,
+        "last_step": 3,
+        "entities": [
+            "char1",
+            "char2"
+        ],
+        "text": "some fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hereeeeeeesome fountain text here"
+    },{
+        "location": "2",
+        "start_step": 0,
+        "last_step": 3,
+        "entities": [
+            "char1",
+            "char2"
+        ],
+        "text": "some fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hersome fountain text hereeeeeeesome fountain text here"
     }]
 }

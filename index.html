@@ -47,7 +47,7 @@
                      </div>
                      
                      <div class="unit">
-                         <textarea class="flext growme">
+                         <textarea class="unit_script">
                              The SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.
 
                              STEEL
@@ -59,7 +59,7 @@
                          </textarea>
                      </div>
                      <div class="unit">
-                         <textarea class="flext growme">
+                         <textarea class="unit_script">
                              The SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.
 
                              STEEL
@@ -71,7 +71,7 @@
                          </textarea>
                      </div>
                      <div class="unit">
-                         <textarea class="flext growme">
+                         <textarea class="unit_script">
                              The SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.
 
                              STEEL
@@ -97,11 +97,24 @@
 	</div>
 
 	<script src="./files/mootools-core-1.5.1-full-compat-yc.js" type="text/javascript"> </script>
-	<script src="./files/flext-uncompressed.js" type="text/javascript"> </script>
+	<script src="./files/jquery-2.1.1.min.js" type="text/javascript"> </script>
+	<script src="./files/scrollspy.js" type="text/javascript"> </script>
 	<script src="./files/scrollLogic.js" type="text/javascript"> </script>
     <script src="files/unit.js"></script>
     <script src="files/location.js"></script>
+    <script src="files/step.js"></script>
     <script src="files/scriptLoader.js"></script>
+    <script src="files/jquery.elastic.source.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+// <![CDATA[
+    jQuery.noConflict();
+    jQuery(document).ready(function(){          
+            jQuery('.unit_script').elastic();
+            jQuery('.unit_script').trigger('update');
+            }); 
+// ]]>
+    </script>
+
 
 </body>
 </html>

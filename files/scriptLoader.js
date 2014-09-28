@@ -1,6 +1,10 @@
 var JSON_FILE = "json";
 var SYNCTORY_FILE = "synctory";
 
+var locations;
+var steps;
+var units;
+
 if (window.File && window.FileReader && window.FileList && window.Blob) {
     // Great success! All the File APIs are supported.
 } else {
@@ -10,12 +14,14 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 function handleFileSelect(evt) {
     var file = evt.target.files[0]; // FileList object
     var split_parts = file.name.split(".");
+    /*
     console.log(" got " + file +
             "name: " + file.name +
             "type: " + file.type +
             "size: " + file.size +
             "beg: " + split_parts[0] +
             "end: " + split_parts[split_parts.length -1]);
+            */
 
     var file_type = split_parts[split_parts.length -1];
     if (!(file_type.toLowerCase() == SYNCTORY_FILE || file_type.toLowerCase() == JSON_FILE)) {
@@ -29,7 +35,7 @@ function handleFileSelect(evt) {
     reader.onload = (function (theFile) {
         return function (e) { 
             JsonObj = e.target.result
-            console.log(JsonObj);
+            //console.log(JsonObj);
             var parsedJSON = JSON.parse(JsonObj);
             LoadScript(parsedJSON);
         };
@@ -41,24 +47,26 @@ function handleFileSelect(evt) {
 function LoadScript(parsedJSON) {
     var locationsJSON = parsedJSON.locations;
     LoadScriptLocations(locationsJSON);
-    var unitsJSON = parsedJSON.units;
-    LoadScriptUnits(unitsJSON);
     var stepsJSON = parsedJSON.steps;
     LoadScriptSteps(stepsJSON);
+    var unitsJSON = parsedJSON.units;
+    LoadScriptUnits(unitsJSON);
+    LoadUnitsIntoScripts();
+    Refresh();
 }
 
 function LoadScriptLocations(locationsJSON) {
-    var locations = []
+    locations = [];
     $$('.location').dispose();
     Array.each(locationsJSON, function(locationJSON, index) {
         var location = new Location(
                 index,
                 locationJSON.name);
         locations.push(location);
-        var locationDiv  = new Element("div", {
+        var locationDiv = new Element("div", {
             'class': 'location',
             'id': 'location_' + location.Key
-        }); 
+        });
         var titleDiv = new Element("div", {
             text: location.Name,
             'class': 'location_title'
@@ -68,14 +76,44 @@ function LoadScriptLocations(locationsJSON) {
     });
 }
 
+function LoadScriptSteps(stepsJSON) {
+    steps = [];
+    $$('.step').dispose();
+    Array.each(stepsJSON, function(stepJSON, index) {
+        var step = new Step(
+                index,
+                stepJSON.stamp);
+        steps.push(step);
+        step.Div = new Element("div", {
+            'class': 'step',
+            'id': 'step_' + step.Key
+        });
+        var stampDiv = new Element("div", {
+            text: step.Stamp,
+            'class': 'step_stamp clear_all'
+        });
+        $(step.Div).adopt(stampDiv);
+        $('step_panel').adopt(step.Div);
+    });
+
+    var nextStep = null;
+    steps.reverse();
+    Array.each(steps, function(step, index) {
+        step.SetNext(nextStep);
+        nextStep = step;
+    });
+    steps.reverse();
+}
+
+
 function LoadScriptUnits(unitsJSON) {
-    var units = []
+    units = [];
     Array.each(unitsJSON, function(unitJSON, index) {
         var unit = new Unit(
                 index,
                 unitJSON.location,
                 unitJSON.start_step,
-                unitJSON.length,
+                unitJSON.last_step,
                 unitJSON.entities,
                 unitJSON.text);
         units.push(unit);
@@ -86,38 +124,68 @@ function LoadScriptUnits(unitsJSON) {
             alert('Could not find location with key ' + unit.LocationKey);
             //CreateNewLocation(unit.LocationKey);
         }
-        var unitDiv  = new Element("div", {
-            'class': 'unit',
+        unit.Div = new Element("div", {
+            'class': 'unit clear_all',
             'id': 'unit_' + unit.Key
         }); 
         var textDiv = new Element("textarea", {
             text: unit.Text,
-            'class': 'flext growme'
+            'class': 'unit_script'
         });
-        unitDiv.adopt(textDiv);
-        $(GetLocationIDFromKey(unit.LocationKey)).adopt(unitDiv);
-        var flext = new Flext(textDiv); 
-        console.log("unit " + index);
-        console.log(" getScrollSize: " +  unitDiv.getScrollSize().y);
-        console.log("actual? " + (unitDiv.getScrollSize().y + flext.vertPadding));
-        console.log("GetUnitHeight " + GetUnitHeight(unitDiv, flext));
+        unit.Div.adopt(textDiv);
+        $(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
+
+        jQuery('.unit_script').elastic();
+        jQuery('.unit_script').trigger('update');
+
+        //console.log("unit " + index);
+        //console.log("div Height " + unit.Div.getScrollSize().y);
+        //console.log("GetUnitHeight " + GetUnitHeight(unit.Div, textDiv));
     });
 }
 
-function LoadScriptSteps(stepsJSON) {
+function LoadUnitsIntoScripts() {
+    Array.each(units, function(unit, index) {
+        var stepKey = unit.LastStep;
+        var step = GetStepFromKey(stepKey);
+        console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
+        if (step != null) {
+            step.AddUnitTerminal(unit);
+        }
+    });
+}
+
+function Refresh() {
+    Array.each(steps, function(step, index) {
+        step.Reposition();
+    });
+}
+
+function GetStepFromKey(stepKey) {
+    var returnStep = null;
+    steps.some(function(step) {
+        if (step.Key == stepKey) {
+            returnStep = step;
+            return true;
+        } else {
+            return false;
+        }
+    });
+    return returnStep;
 }
 
 function GetLocationIDFromKey(key) {
     return 'location_' + key;
 }
 
-function GetUnitHeight(container, flext) {
-    debugger;
+function GetUnitHeight(container, textarea) {
     var containerPadding = container.getStyle('padding-top').toInt()+container.getStyle('padding-bottom').toInt()+container.getStyle('border-top').toInt()+container.getStyle('border-bottom').toInt();
-    var textareaHeight = flext.el.getScrollSize().y + flext.vertPadding;
-    console.log("containerPadding " + containerPadding);
-    console.log("textareaHeight " + textareaHeight);
-    return containerPadding + textareaHeight;
+    var textareaPadding = textarea.getStyle('padding-top').toInt()+textarea.getStyle('padding-bottom').toInt()+textarea.getStyle('border-top').toInt()+textarea.getStyle('border-bottom').toInt();
+    var textareaHeight = textarea.getScrollSize().y;
+    //console.log("containerPadding " + containerPadding);
+    //console.log("textareaPadding " + textareaPadding);
+    //console.log("textareaHeight " + textareaHeight);
+    return containerPadding + textareaPadding + textareaHeight;
 }
 
 document.getElementById('file').addEventListener('change', handleFileSelect, false);
