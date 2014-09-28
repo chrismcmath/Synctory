@@ -2,18 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" slick-uniqueid="3">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="shortcut icon" href="http://www.rickyh.co.uk/wp-content/themes/rickyhlook/images/icons/fav.png">
+<link rel="shortcut icon" href="">
 <link rel="stylesheet" href="./files/style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="./files/positioning.css" type="text/css" media="screen">
-<link href="http://demo.rickyh.co.uk/" title="RickyH - Demos" rel="index">
 
 </head>
 <body>
 	<div id="wrap">
         <div id="header">
             <button class="button" id="load_button" type="button">Load</button>
-            <input type="file" id="file" name="file"/>
+            <input type="file" value="orange" id="file" name="file"/>
             <output id="list"></output>
+            <input type="button" value="save" onclick="OnSaveClicked();"/>
             <p style="pointer-events:none"> S Y N C T O R Y </p>
         </div>
 
@@ -103,6 +103,7 @@
     <script src="files/unit.js"></script>
     <script src="files/location.js"></script>
     <script src="files/step.js"></script>
+    <script src="files/modelController.js"></script>
     <script src="files/scriptLoader.js"></script>
     <script src="files/jquery.elastic.source.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">

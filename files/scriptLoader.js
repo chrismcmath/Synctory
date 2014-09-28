@@ -1,27 +1,20 @@
 var JSON_FILE = "json";
 var SYNCTORY_FILE = "synctory";
 
-var locations;
-var steps;
-var units;
-
 if (window.File && window.FileReader && window.FileList && window.Blob) {
     // Great success! All the File APIs are supported.
 } else {
     alert('The File APIs are not fully supported in this browser.');
 }
 
-function handleFileSelect(evt) {
-    var file = evt.target.files[0]; // FileList object
+function LoadFile(file) {
     var split_parts = file.name.split(".");
-    /*
     console.log(" got " + file +
             "name: " + file.name +
             "type: " + file.type +
             "size: " + file.size +
             "beg: " + split_parts[0] +
             "end: " + split_parts[split_parts.length -1]);
-            */
 
     var file_type = split_parts[split_parts.length -1];
     if (!(file_type.toLowerCase() == SYNCTORY_FILE || file_type.toLowerCase() == JSON_FILE)) {
@@ -32,7 +25,7 @@ function handleFileSelect(evt) {
     var reader = new FileReader();
 
     // Closure to capture the file information.
-    reader.onload = (function (theFile) {
+    reader.onload = (function (f) {
         return function (e) { 
             JsonObj = e.target.result
             //console.log(JsonObj);
@@ -52,7 +45,7 @@ function LoadScript(parsedJSON) {
     var unitsJSON = parsedJSON.units;
     LoadScriptUnits(unitsJSON);
     LoadUnitsIntoScripts();
-    Refresh();
+    OnLoadComplete();
 }
 
 function LoadScriptLocations(locationsJSON) {
@@ -137,10 +130,6 @@ function LoadScriptUnits(unitsJSON) {
 
         jQuery('.unit_script').elastic();
         jQuery('.unit_script').trigger('update');
-
-        //console.log("unit " + index);
-        //console.log("div Height " + unit.Div.getScrollSize().y);
-        //console.log("GetUnitHeight " + GetUnitHeight(unit.Div, textDiv));
     });
 }
 
@@ -155,11 +144,58 @@ function LoadUnitsIntoScripts() {
     });
 }
 
-function Refresh() {
-    Array.each(steps, function(step, index) {
-        step.Reposition();
-    });
+function SaveFile() {
+    var jObj = {};
+    jObj.title = "title";
+    jObj.author = "author";
+    jObj.locations = GetLocationJSON();
+    jObj.steps = GetStepJSON();
+    jObj.units = GetUnitJSON();
+
+    var jsonString = JSON.encode(jObj);
+
+    FileWriter jsonWriter = new FileWriter("written_file.synctory");
+    jsonArray.writeJSONString(jsonWriter);
+    jsonWriter.close();
 }
+
+function GetLocationJSON() {
+    var locationJSON = [];
+    Array.each(locations, function(location, index) {
+        var l = {};
+        l.key = location.Key;
+        l.name = location.Name;
+        locationJSON.push(l);
+    });
+    return locationJSON;
+}
+
+function GetStepJSON() {
+    var stepJSON = [];
+    Array.each(steps, function(step, index) {
+        var s = {};
+        s.key = step.Key;
+        s.stamp = step.Stamp;
+        stepJSON.push(s);
+    });
+    return stepJSON;
+}
+
+function GetUnitJSON() {
+    var unitJSON = [];
+    Array.each(units, function(unit, index) {
+        var u = {};
+        u.location = unit.LocationKey;
+        u.start_step = unit.StartStep;
+        u.last_step = unit.LastStep;
+        u.entites = unit.Entites;
+        u.text = unit.Text;
+        unitJSON.push(u);
+    });
+    return unitJSON;
+}
+
+/* Utils */
 
 function GetStepFromKey(stepKey) {
     var returnStep = null;
@@ -178,14 +214,3 @@ function GetLocationIDFromKey(key) {
     return 'location_' + key;
 }
 
-function GetUnitHeight(container, textarea) {
-    var containerPadding = container.getStyle('padding-top').toInt()+container.getStyle('padding-bottom').toInt()+container.getStyle('border-top').toInt()+container.getStyle('border-bottom').toInt();
-    var textareaPadding = textarea.getStyle('padding-top').toInt()+textarea.getStyle('padding-bottom').toInt()+textarea.getStyle('border-top').toInt()+textarea.getStyle('border-bottom').toInt();
-    var textareaHeight = textarea.getScrollSize().y;
-    //console.log("containerPadding " + containerPadding);
-    //console.log("textareaPadding " + textareaPadding);
-    //console.log("textareaHeight " + textareaHeight);
-    return containerPadding + textareaPadding + textareaHeight;
-}
-
-document.getElementById('file').addEventListener('change', handleFileSelect, false);
