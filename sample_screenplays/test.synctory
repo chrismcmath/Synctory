@@ -84,7 +84,7 @@
     },{
         "active": true,
         "location": "2",
-        "steps": [0,3],
+        "steps": [0,1,2,3],
         "entities": [
             "char1",
             "char2"

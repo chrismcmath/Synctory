@@ -143,14 +143,50 @@ var Unit = new Class({
     },
 
     OnSplit: function() {
-        debugger;
         console.log('on Split');
+        debugger;
+        if (this.Steps.length > 1) {
+            alert("Only units with length of one can be split.\nTry shrinking it (-) instead.");
+        } else {
+            var newUnit = new Unit(units.length, this.LocationKey, this.Steps.getLast(), [], "Split Unit", true);
+            this.Steps.erase(this.Steps.getLast());
+            units.splice(units.indexOf(this) + 1, 0, newUnit);
+
+            /* inform steps of change */
+            var terminalStep = GetStepFromKey(this.GetLastStepKey());
+
+        }
     },
     OnClose: function() {
         console.log('on Close');
     },
     OnShrink: function() {
         console.log('on Shrink');
+        if (this.Steps.length <= 1) {
+            alert("Only units with length of more than one can be shrunk.\nIf you want to make a new unit, try spliting it (÷) instead.");
+        } else {
+            /*Create Empty Unit*/
+            var emptyUnit = new Unit(units.length, this.LocationKey, [this.Steps.getLast()], [], "", false);
+            emptyUnit.CreateUnitHTML();
+            emptyUnit.Div.inject(this.Div, 'after');
+            this.Div.setStyle('height', null);
+
+            /* Add to model */
+            units.splice(units.indexOf(this) + 1, 0, emptyUnit);
+
+            /* Add to view */
+            var emptyUnitStep = GetStepFromKey(emptyUnit.GetLastStepKey());
+            emptyUnitStep.LocationUnitHash[this.LocationKey] = emptyUnit;
+            emptyUnitStep.UnitTerminals.erase(this);
+            emptyUnitStep.UnitTerminals.push(emptyUnit);
+
+            /*Update Current Unit*/
+            this.Steps.erase(this.Steps.getLast());
+            var terminalStep = GetStepFromKey(this.GetLastStepKey());
+            terminalStep.UnitTerminals.push(this);
+
+            Refresh();
+        }
     },
     OnGrow: function() {
         console.log('on Grow');
