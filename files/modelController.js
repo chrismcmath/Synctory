@@ -28,6 +28,11 @@ function RefreshFrom(step_key) {
     }
 }
 
+function OnLoadClicked() {
+    console.log("OnLoadClicked()");
+    document.getElementById('file').click();
+}
+
 function OnSaveClicked() {
     SaveFile();
 }

@@ -109,7 +109,7 @@ var Unit = new Class({
         });
 
         var plusDiv = new Element("div", {
-            html: '+',
+            html: '&#9679;',
             'class': 'add_unit'
         });
         this.Div.adopt(plusDiv);

@@ -10,40 +10,40 @@
 <body>
 	<div id="wrap">
         <div id="header">
-            <button class="button" id="load_button" type="button">Load</button>
-            <input type="file" value="orange" id="file" name="file"/>
-            <output id="list"></output>
-            <input type="button" value="save" onclick="OnSaveClicked();"/>
+            <div class="header_button" id="header_load_button" onclick="OnLoadClicked()">L</div><div class="header_button" id="header_save_button" onclick="OnSaveClicked()">S</div>
+            <input type="file" id="file" style="display:none"/>
             <p style="pointer-events:none"> S Y N C T O R Y </p>
+             <div class="deco_row" id="step_inner_bottom"></div>
+             <div class="deco_row" id="step_mid_bottom"></div>
+             <div class="deco_row" id="step_outer_bottom"></div>
         </div>
 
 		
 		<div id="main">
 			 <div id="step_panel">
+                 <div class="deco_column" id="step_inner_right"></div>
+                 <div class="deco_column" id="step_mid_right"></div>
+                 <div class="deco_column" id="step_outer_right"></div>
                  <div class="step">
                      No time declared.
                      Units:
                      LOCATION1, LOCATION2
-                     <div class="step_actions">
-                     </div>
                  </div>
                  <div class="step" style="top: 280px">
                      No time declared.
-                     <div class="step_actions">
-                     </div>
                  </div>
                  <div class="step" style="top: 560px">
                      No time declared.
-                     <div class="step_actions">
-                     </div>
                  </div>
 			 </div>
 			 
 			 
              <div id="locations">
                  <div class="location" id="location_1">
-                         <div class="location_title">
-                             LOCATION
+                         <div class="location_title_column">
+                             <div class="location_title">
+                                 <p>LOCATION</p>
+                             </div>
                          </div>
                      
                      <div class="units">
@@ -67,7 +67,7 @@
                              <div class="grow_unit unit_button">+</div><div class="shrink_unit unit_button">-</div>                         </div>
                      </div>
                      <div class="unit unit_inactive" >
-                         <div class="add_unit">+</div>
+                         <div class="add_unit">&#9679;</div>
                      </div>
                      <div class="unit">
                          <textarea class="unit_script">

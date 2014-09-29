@@ -60,11 +60,15 @@ function LoadScriptLocations(locationsJSON) {
             'class': 'location',
             'id': 'location_' + location.Key
         });
+        var titleColumnDiv = new Element("div", {
+            'class': 'location_title_column'
+        });
         var titleDiv = new Element("div", {
-            text: location.Name,
+            html:'<p>'+location.Name+'</p>',
             'class': 'location_title'
         });
-        $(locationDiv).adopt(titleDiv);
+        $(titleColumnDiv).adopt(titleDiv);
+        $(locationDiv).adopt(titleColumnDiv);
         $('locations').adopt(locationDiv);
     });
 }
