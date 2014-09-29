@@ -1,2 +1,0 @@
-:cd ~/Documents/tools/Synctory
-
