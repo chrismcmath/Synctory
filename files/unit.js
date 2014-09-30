@@ -105,6 +105,7 @@ var Unit = new Class({
     },
 
     MakeInactive: function() {
+        this.Active = false;
         Array.each(this.Div.getElements('.unit_activated'), function (child, index) {
             child.set({
                 styles: {

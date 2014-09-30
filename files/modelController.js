@@ -21,6 +21,10 @@ function OnLoadComplete() {
 }
 
 function Refresh() {
+    Array.each(units, function(unit, index) {
+        unit.Div.setStyle('height', null);
+    });
+
     Array.each(steps, function(step, index) {
         step.Reposition();
     });
@@ -44,7 +48,8 @@ function OnSaveClicked() {
 function OnNewLocation() {
     LoadLocation(LOCATION_ID++, 'NEW LOCATION');
     steps.each(function(step, index) {
-        LoadUnit(UNIT_ID, locations.getLast().Key, [step.Key], [], "", false);
+        var unit = LoadUnit(UNIT_ID, locations.getLast().Key, [step.Key], [], "", false);
+        LoadUnitIntoSteps(unit);
     });
     Refresh();
 }
@@ -129,6 +134,8 @@ function LoadUnit(key, location, steps, entities, text, active) {
 
     jQuery(unit.TextDiv).elastic();
     jQuery('.unit_script').trigger('update');
+
+    return unit;
 }
 
 // NOTE: Ideally this would be done straight from a json file
