@@ -9,12 +9,14 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 
 function LoadFile(file) {
     var split_parts = file.name.split(".");
+    /*
     console.log(" got " + file +
             "name: " + file.name +
             "type: " + file.type +
             "size: " + file.size +
             "beg: " + split_parts[0] +
             "end: " + split_parts[split_parts.length -1]);
+            */
 
     var file_type = split_parts[split_parts.length -1];
     if (!(file_type.toLowerCase() == SYNCTORY_FILE || file_type.toLowerCase() == JSON_FILE)) {
@@ -77,22 +79,22 @@ function LoadScriptSteps(stepsJSON) {
     steps = [];
     $$('.step').dispose();
     Array.each(stepsJSON, function(stepJSON, index) {
+
+        /* Make sure our key creator doesn't overwrite any old steps */ 
+        var intKey = parseInt(stepJSON.key);
+        if (intKey > STEP_ID) {
+            STEP_ID = intKey + 1;
+        }
+
         var step = new Step(
-                index,
+                stepJSON.key,
                 stepJSON.stamp);
         steps.push(step);
-        step.Div = new Element("div", {
-            'class': 'step',
-            'id': 'step_' + step.Key
-        });
-        var stampDiv = new Element("div", {
-            text: step.Stamp,
-            'class': 'step_stamp clear_all'
-        });
-        $(step.Div).adopt(stampDiv);
+        step.CreateDiv();
         $('step_panel').adopt(step.Div);
     });
 
+    /*
     var nextStep = null;
     steps.reverse();
     Array.each(steps, function(step, index) {
@@ -100,6 +102,7 @@ function LoadScriptSteps(stepsJSON) {
         nextStep = step;
     });
     steps.reverse();
+    */
 }
 
 
@@ -122,6 +125,7 @@ function LoadScriptUnits(unitsJSON) {
             //CreateNewLocation(unit.LocationKey);
         }
         unit.CreateUnitHTML();
+        $(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
     });
 
     jQuery('.unit_script').elastic();

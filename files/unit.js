@@ -12,6 +12,14 @@ var Unit = new Class({
         return this.Steps.getLast();
     },
 
+    RemoveStep: function(stepKey) {
+        this.Steps.erase(stepKey);
+    },
+
+    InsertStepAfter: function(newKey, prevKey) {
+        this.Steps.splice(this.Steps.indexOf(prevKey) + 1, 0, newKey);
+    },
+
     GetBottomY: function() {
         //console.log('unit ' + this.Key + ' GET bottom: ' + (this.Div.getPosition().y + this.Div.getScrollSize().y));
         return this.Div.getPosition().y + this.Div.getScrollSize().y;
@@ -96,7 +104,6 @@ var Unit = new Class({
         this.Div.adopt(header);
         this.Div.adopt(this.TextDiv);
         this.Div.adopt(footer);
-        $(GetLocationIDFromKey(this.LocationKey)).adopt(this.Div);
     },
 
     CreateInactive: function() {
@@ -119,7 +126,7 @@ var Unit = new Class({
         this.Div.addEvent('click', function(event){
             event.stop();
             unit.ConvertToActive();
-            RefreshFrom(unit.StartStep);
+            Refresh();
         });
     },
 
@@ -143,25 +150,20 @@ var Unit = new Class({
     },
 
     OnSplit: function() {
-        console.log('on Split');
-        debugger;
         if (this.Steps.length > 1) {
             alert("Only units with length of one can be split.\nTry shrinking it (-) instead.");
         } else {
-            var newUnit = new Unit(units.length, this.LocationKey, this.Steps.getLast(), [], "Split Unit", true);
-            this.Steps.erase(this.Steps.getLast());
-            units.splice(units.indexOf(this) + 1, 0, newUnit);
+            /* Create a new step */
+            InsertNewStep(this.Steps[0]);
 
-            /* inform steps of change */
-            var terminalStep = GetStepFromKey(this.GetLastStepKey());
-
+            /* Shrink the clicked unit */
+            this.OnShrink();
         }
     },
     OnClose: function() {
         console.log('on Close');
     },
     OnShrink: function() {
-        console.log('on Shrink');
         if (this.Steps.length <= 1) {
             alert("Only units with length of more than one can be shrunk.\nIf you want to make a new unit, try spliting it (÷) instead.");
         } else {
@@ -183,15 +185,17 @@ var Unit = new Class({
             /*Update Current Unit*/
             this.Steps.erase(this.Steps.getLast());
             var terminalStep = GetStepFromKey(this.GetLastStepKey());
+            debugger;
             terminalStep.UnitTerminals.push(this);
 
             Refresh();
         }
     },
     OnGrow: function() {
-        console.log('on Grow');
         var terminalStep = GetStepFromKey(this.GetLastStepKey());
-        var nextStep = terminalStep.NextStep;
+        var nextStep = this.GetNextStep();
+        if (nextStep == null) alert ("Error, next step is null");
+
         if (nextStep.RequestGrowth(this)) {
             terminalStep.RemoveUnitTerminal(this);
             this.Steps.push(nextStep.Key);
@@ -200,7 +204,18 @@ var Unit = new Class({
              * but our logic is from when the step terminates,
              * copy across the stamp here to make it look like it's the other one */
             nextStep.SetStamp(terminalStep.Stamp);
+
+            Refresh();
         }
-        Refresh();
+    },
+
+    GetNextStep: function() {
+        var stepIndex = steps.indexOf(GetStepFromKey(this.GetLastStepKey()));
+        if (stepIndex >= (steps.length - 1)) {
+            return null;
+        }
+
+        return steps[stepIndex + 1]; 
     }
+
 });

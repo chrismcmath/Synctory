@@ -6,10 +6,6 @@ var Step = new Class({
         this.UnitTerminals = [];
     },
 
-    SetNext: function(next) {
-        this.NextStep = next; //used for writing to json
-    },
-
     SetStamp: function(stamp) {
         this.Stamp = stamp;
         this.Div.getChildren('.step_stamp')[0].textContent = stamp;
@@ -24,7 +20,11 @@ var Step = new Class({
         if (this.UnitTerminals.length == 0) {
             steps.erase(this);
             this.Div.dispose();
-            //TODO: remove from all units, or never have it in units in the first place
+
+            var key = this.Key;
+            this.LocationUnitHash.each(function(unit, location) {
+                unit.RemoveStep(key);
+            });
         }
     },
 
@@ -49,7 +49,6 @@ var Step = new Class({
         });
 
         var height = bottomY - this.Div.getPosition().y;
-        console.log('step set height to ' + height);
         this.Div.setStyle('height', height + 'px');
     },
 
@@ -67,7 +66,6 @@ var Step = new Class({
             console.log('refuse growth, next thing is active');
             return false;
         } else {
-            console.log('can grow');
             this.LocationUnitHash[unit.LocationKey] = unit;
             targetedUnit.Div.dispose();
             this.RemoveUnitTerminal(targetedUnit);
@@ -75,5 +73,18 @@ var Step = new Class({
             this.AddUnitTerminal(unit);
             return true;
         }
+    },
+
+    CreateDiv: function() {
+        this.Div = new Element("div", {
+            'class': 'step',
+            'id': 'step_' + this.Key
+        });
+        var stampDiv = new Element("div", {
+            text: this.Stamp,
+            'class': 'step_stamp clear_all'
+        });
+        $(this.Div).adopt(stampDiv);
     }
+
 });
