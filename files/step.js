@@ -18,14 +18,23 @@ var Step = new Class({
     RemoveUnitTerminal: function(unit) {
         this.UnitTerminals.erase(unit);
         if (this.UnitTerminals.length == 0) {
-            steps.erase(this);
-            this.Div.dispose();
-
-            var key = this.Key;
-            this.LocationUnitHash.each(function(unit, location) {
-                unit.RemoveStep(key);
-            });
         }
+    },
+
+    RemoveStep: function() {
+        /* Hack - because step stamps are for when the step beings,
+         * but our logic is from when the step terminates,
+         * copy across the stamp here to make it look like it's the other one */
+        var nextStep = steps[steps.indexOf(this) +1];
+        nextStep.SetStamp(terminalStep.Stamp);
+
+        steps.erase(this);
+        this.Div.dispose();
+
+        var key = this.Key;
+        this.LocationUnitHash.each(function(unit, location) {
+            unit.RemoveStep(key);
+        });
     },
 
     AddUnit: function(unit) {

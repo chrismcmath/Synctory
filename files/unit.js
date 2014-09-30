@@ -32,11 +32,9 @@ var Unit = new Class({
     },
 
     CreateUnitHTML: function() {
-        if (this.Active) {
-            this.CreateActive();
-        } else {
-            this.CreateActive();
-            this.CreateInactive();
+        this.CreateActive();
+        if (!this.Active) {
+            this.MakeInactive();
         }
     },
 
@@ -106,7 +104,7 @@ var Unit = new Class({
         this.Div.adopt(footer);
     },
 
-    CreateInactive: function() {
+    MakeInactive: function() {
         Array.each(this.Div.getElements('.unit_activated'), function (child, index) {
             child.set({
                 styles: {
@@ -146,8 +144,8 @@ var Unit = new Class({
         this.Div.removeClass('unit_inactive');
         //this.Div.setProperty('class', 'unit clear_all');
         this.TextDiv.value = this.Text;
-        //jQuery(this.TextDiv).elastic();
     },
+
 
     OnSplit: function() {
         if (this.Steps.length > 1) {
@@ -161,7 +159,13 @@ var Unit = new Class({
         }
     },
     OnClose: function() {
-        console.log('on Close');
+        if (!confirm("This will delete the unit, are you sure?")) return;
+
+        while (this.Steps.length > 1) {
+            this.OnShrink();
+        }
+
+        this.MakeInactive();
     },
     OnShrink: function() {
         if (this.Steps.length <= 1) {
@@ -185,7 +189,6 @@ var Unit = new Class({
             /*Update Current Unit*/
             this.Steps.erase(this.Steps.getLast());
             var terminalStep = GetStepFromKey(this.GetLastStepKey());
-            debugger;
             terminalStep.UnitTerminals.push(this);
 
             Refresh();
@@ -199,11 +202,6 @@ var Unit = new Class({
         if (nextStep.RequestGrowth(this)) {
             terminalStep.RemoveUnitTerminal(this);
             this.Steps.push(nextStep.Key);
-
-            /* Hack - because step stamps are for when the step beings,
-             * but our logic is from when the step terminates,
-             * copy across the stamp here to make it look like it's the other one */
-            nextStep.SetStamp(terminalStep.Stamp);
 
             Refresh();
         }
