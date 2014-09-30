@@ -1,0 +1,31 @@
+{
+    "title": "S Y N C T O R Y",
+    "author": "Chris McM",
+    "steps": [{
+        "key": 0,
+        "stamp": "Click here to rename this step"
+    },{
+        "key": 1,
+        "stamp": "You could use a timestamp (00:01:34)\nor even some cues"
+    }],
+    "locations": [{
+        "key": 0,
+        "name": "CLICK TO RENAME - INT. HOUSE"
+    }],
+    "units": [{
+        "active": true,
+        "location": "0",
+        "steps": [0],
+        "entities": [
+            "BOBBY",
+            "RED CHAIR"
+        ],
+        "text": "Here are your stage directions.\n\n A CHARACTER\nClick here to edit\n\nANOTHER CHARACTER\nEverything in caps is an 'entity', and can't be used anywhere else in this step!"
+    },{
+        "active": false,
+        "location": "0",
+        "steps": [1],
+        "entities": [],
+        "text": ""
+    }]
+}

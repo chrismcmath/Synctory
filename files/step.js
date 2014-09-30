@@ -18,6 +18,7 @@ var Step = new Class({
     RemoveUnitTerminal: function(unit) {
         this.UnitTerminals.erase(unit);
         if (this.UnitTerminals.length == 0) {
+            this.RemoveStep();
         }
     },
 
@@ -26,7 +27,7 @@ var Step = new Class({
          * but our logic is from when the step terminates,
          * copy across the stamp here to make it look like it's the other one */
         var nextStep = steps[steps.indexOf(this) +1];
-        nextStep.SetStamp(terminalStep.Stamp);
+        nextStep.SetStamp(this.Stamp);
 
         steps.erase(this);
         this.Div.dispose();

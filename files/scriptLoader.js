@@ -54,24 +54,8 @@ function LoadScriptLocations(locationsJSON) {
     locations = [];
     $$('.location').dispose();
     Array.each(locationsJSON, function(locationJSON, index) {
-        var location = new Location(
-                index,
-                locationJSON.name);
-        locations.push(location);
-        var locationDiv = new Element("div", {
-            'class': 'location',
-            'id': 'location_' + location.Key
-        });
-        var titleColumnDiv = new Element("div", {
-            'class': 'location_title_column'
-        });
-        var titleDiv = new Element("div", {
-            html:'<p>'+location.Name+'</p>',
-            'class': 'location_title'
-        });
-        $(titleColumnDiv).adopt(titleDiv);
-        $(locationDiv).adopt(titleColumnDiv);
-        $('locations').adopt(locationDiv);
+        UpdateKeyGenerator(LOCATION_ID, locationJSON.key);
+        LoadLocation(locationJSON.key, locationJSON.name);
     });
 }
 
@@ -79,19 +63,8 @@ function LoadScriptSteps(stepsJSON) {
     steps = [];
     $$('.step').dispose();
     Array.each(stepsJSON, function(stepJSON, index) {
-
-        /* Make sure our key creator doesn't overwrite any old steps */ 
-        var intKey = parseInt(stepJSON.key);
-        if (intKey > STEP_ID) {
-            STEP_ID = intKey + 1;
-        }
-
-        var step = new Step(
-                stepJSON.key,
-                stepJSON.stamp);
-        steps.push(step);
-        step.CreateDiv();
-        $('step_panel').adopt(step.Div);
+        UpdateKeyGenerator(STEP_ID, stepJSON.key);
+        LoadStep(stepJSON.key, stepJSON.stamp);
     });
 
     /*
@@ -109,8 +82,9 @@ function LoadScriptSteps(stepsJSON) {
 function LoadScriptUnits(unitsJSON) {
     units = [];
     Array.each(unitsJSON, function(unitJSON, index) {
+        UpdateKeyGenerator(UNIT_ID, unitJSON.key);
         var unit = new Unit(
-                index,
+                unitJSON.key,
                 unitJSON.location,
                 unitJSON.steps,
                 unitJSON.entities,
