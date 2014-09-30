@@ -98,6 +98,41 @@ var Step = new Class({
             'class': 'step_stamp clear_all'
         });
         $(this.Div).adopt(stampDiv);
-    }
+    },
 
+    CheckEntityConflict: function() {
+        /* get all entities */
+        var entities = [];
+        this.LocationUnitHash.each(function(unit, location) {
+            entities.append(unit.Entities);
+        });
+
+        var dupes = [];
+        Array.each(entities, function (entity, index) {
+            if (entities.filter(function(e) { return e == entity; }).length > 1) {
+                dupes.push(entity);
+                entities.erase(entity);
+            }
+        });
+
+        var step = this;
+        if (dupes.length > 0) {
+        Array.each(dupes, function (dupe, index) {
+            step.LocationUnitHash.each(function(unit, location) {
+                if (unit.Entities.contains(dupe)) {
+                    console.log('has conflict');
+                    unit.HasConflict();
+                } else {
+                    console.log('no conflict');
+                    unit.NoConflict();
+                }
+            });
+        });
+        } else {
+            step.LocationUnitHash.each(function(unit, location) {
+                console.log('no conflict');
+                unit.NoConflict();
+            });
+        }
+    }
 });

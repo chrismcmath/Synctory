@@ -1,4 +1,8 @@
+var CONFLICT_COLOUR = '#FFF5F5';
+var NO_CONFLICT_COLOUR = 'white';
+
 var Unit = new Class({
+
     initialize: function(key, locationKey, steps, entities, text, active) {
         this.Key = key;
         this.LocationKey = locationKey;
@@ -48,6 +52,11 @@ var Unit = new Class({
         this.TextDiv = new Element("textarea", {
             text: this.Text,
             'class': 'unit_script unit_activated'
+        });
+        this.TextDiv.addEvents({
+            keyup: function() {
+                unit.UpdateEntities(this.value);
+            }
         });
         var header = new Element("div", {
             'class': 'unit_header unit_activated'
@@ -132,8 +141,8 @@ var Unit = new Class({
     ConvertToActive: function() {
         this.Div.removeEvents();
         this.Active = true;
-        this.Text = "NEW UNIT\nNEW UNIT\nNEW UNIT\nNEW UNIT\nNEW UNIT\nNEW UNIT\n";
-        this.Entities = "";
+        this.Text = "New Unit";
+        this.Entities = [];
         this.Div.getElements('.add_unit').dispose();
         Array.each(this.Div.getElements('.unit_activated'), function (child, index) {
             child.set({
@@ -226,6 +235,76 @@ var Unit = new Class({
         }
 
         return steps[stepIndex + 1]; 
-    }
+    },
 
+    UpdateEntities: function(text) {
+        var entities = [];
+        for (i = 0; i < text.length; i++) {
+            var c = text.charAt(i);
+            if (c === c.toUpperCase()) {
+                var candidate = "";
+                for(j = i; j < text.length && IsLegalEntityChar(text[j]); j++) {
+                    candidate += text[j];
+                    i++;
+                }
+
+                var trimmedCandidate = candidate.trim();
+                if (trimmedCandidate.length > 1) {
+                    entities.push(trimmedCandidate);
+                }
+            }
+        }
+
+        /*Check for removed entities*/
+        var entityChanged = false;
+        var unit = this;
+        Array.each(this.Entities, function (entity, index) {
+            if (!entities.contains(entity)) {
+                entityChanged = true;
+                unit.Entities.erase(entity);
+            }
+        });
+
+        /*Add new removed entities*/
+        Array.each(entities, function (entity, index) {
+            if (!unit.Entities.contains(entity)) {
+                entityChanged = true;
+                unit.Entities.push(entity);
+            }
+        });
+
+        if (entityChanged) {
+            Array.each(this.Steps, function(stepKey, index) {
+                GetStepFromKey(unit.GetLastStepKey()).CheckEntityConflict();
+            });
+        }
+    },
+
+    HasConflict: function(text) {
+        this.SetColourScheme('black', 'white');
+    },
+
+    NoConflict: function(text) {
+        this.SetColourScheme('white', 'black');
+    },
+
+    SetColourScheme: function(backColour, frontColour) {
+        this.Div.set('styles', {
+            background: backColour
+        });
+        this.TextDiv.set('styles', {
+            background: backColour,
+            color: frontColour
+        });
+        Array.each(this.Div.getElementsByClassName('unit_divide'), function(e, index) {
+            e.set('styles', {
+                background: frontColour
+            });
+        });
+        Array.each(this.Div.getElementsByClassName('unit_button'), function(e, index) {
+            e.set('styles', {
+                color: frontColour
+            });
+        });
+    }
 });

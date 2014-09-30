@@ -165,3 +165,9 @@ function LoadDefaultView() {
     LoadUnitsIntoSteps();
     OnLoadComplete();
 }
+
+function IsLegalEntityChar(c) {
+    var bool = (c.length === 1 && c.test(/[A-Z]/) || c === " ");
+    //console.log('IsLegalEntityChar letter: ' + c + ' result: ' + bool);
+    return bool;
+}

@@ -60,6 +60,11 @@
     background: white;
 }
 
+.step_stamp {
+    overflow: scroll;
+    height: 100%;
+}
+
 #locations{
     font-size:72px;
     width:3000px;
@@ -270,6 +275,7 @@
     width:50%;
     height: 100%;
     text-align: center;
+    color: black;
 }
 
 .close_unit {
