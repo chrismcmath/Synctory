@@ -144,6 +144,9 @@ var Unit = new Class({
         this.Div.removeClass('unit_inactive');
         //this.Div.setProperty('class', 'unit clear_all');
         this.TextDiv.value = this.Text;
+
+        jQuery(this.TextDiv).elastic();
+        jQuery('.unit_script').trigger('update');
     },
 
 

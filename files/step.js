@@ -78,9 +78,12 @@ var Step = new Class({
         } else {
             this.LocationUnitHash[unit.LocationKey] = unit;
             targetedUnit.Div.dispose();
-            this.RemoveUnitTerminal(targetedUnit);
-            units.erase(targetedUnit);
+
+            // order imp
             this.AddUnitTerminal(unit);
+            this.RemoveUnitTerminal(targetedUnit);
+
+            units.erase(targetedUnit);
             return true;
         }
     },

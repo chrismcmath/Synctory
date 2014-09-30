@@ -4,6 +4,7 @@ window.addEvent('domready', function() {
     steps = [];
     locations = [];
     units = [];
+
     STEP_ID = 0;
     LOCATION_ID = 0;
     UNIT_ID = 0;
@@ -38,6 +39,14 @@ function OnLoadClicked() {
 
 function OnSaveClicked() {
     SaveFile();
+}
+
+function OnNewLocation() {
+    LoadLocation(LOCATION_ID++, 'NEW LOCATION');
+    steps.each(function(step, index) {
+        LoadUnit(UNIT_ID, locations.getLast().Key, [step.Key], [], "", false);
+    });
+    Refresh();
 }
 
 function OnTextareaHeightChanged() {
@@ -75,12 +84,14 @@ function InsertNewStep(prevStepKey) {
 function UpdateKeyGenerator(generatorID, keyString) {
     /* Make sure our key creator doesn't overwrite any old key */ 
     var intKey = parseInt(keyString);
-    if (intKey > generatorID) {
-        generatorID = intKey + 1;
+    if (intKey >= generatorID) {
+        return intKey + 1;
     }
+    return generatorID;
 }
 
 function LoadLocation(key, name) {
+    LOCATION_ID = UpdateKeyGenerator(LOCATION_ID, key);
     var location = new Location(key, name);
     locations.push(location);
     var locationDiv = new Element("div", {
@@ -97,13 +108,27 @@ function LoadLocation(key, name) {
     $(titleColumnDiv).adopt(titleDiv);
     $(locationDiv).adopt(titleColumnDiv);
     $('locations').adopt(locationDiv);
+    locationDiv.inject($('new_location'), 'before');
 }
 
 function LoadStep(key, stamp) {
+    STEP_ID = UpdateKeyGenerator(STEP_ID, key);
     var step = new Step(key, stamp);
     steps.push(step);
     step.CreateDiv();
     $('step_panel').adopt(step.Div);
+}
+
+function LoadUnit(key, location, steps, entities, text, active) {
+    UNIT_ID = UpdateKeyGenerator(UNIT_ID, key);
+    var unit = new Unit(key, location, steps, entities, text, active);
+    units.push(unit);
+
+    unit.CreateUnitHTML();
+    $(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
+
+    jQuery(unit.TextDiv).elastic();
+    jQuery('.unit_script').trigger('update');
 }
 
 // NOTE: Ideally this would be done straight from a json file
@@ -112,23 +137,10 @@ function LoadDefaultView() {
     LoadStep('0', 'This is a step.\nIt measures an arbitrary amount of time.\n Everything on this row is happening simultenously.\nClick to rename it.');
     LoadStep('1', '00:01:34 \n "The clock strikes eleven"');
     LoadLocation('0', 'CLICK TO NAME LOCATION');
-    LoadScriptUnits(new Object(
-                [{
-        active: true,
-        location: "0",
-        steps: [0],
-        entities: [
-        "A CHARACTER",
-        "ANOTHER CHARACTER"
-        ],
-        text: "Here are your stage directions.\n\nA CHARACTER\nYou can click here to edit\n\nANOTHER CHARACTER\nThat's right. Everything in caps is an 'entity', and can't be used anywhere else in this step!\n\nA CHARACTER\nClick the circle below to make a new unit, or the circle to the right to make a new locaiton."
-    },{
-        active: false,
-        location: "0",
-        steps: [1],
-        entities: [],
-        text: ""
-    }]));
-    LoadUnitsIntoScripts();
+    LoadUnit('0', '0', ['0'], ["A CHARACTER", "ANOTHER CHARACTER"],
+        "Here are your stage directions.\n\nA CHARACTER\nYou can click here to edit\n\nANOTHER CHARACTER\nThat's right. Everything in caps is an 'entity', and can't be used anywhere else in this step!\n\nA CHARACTER\nClick the circle below to make a new unit, or the circle to the right to make a new location.",
+        true);
+    LoadUnit('1', '0', ['1'], [], "", false);
+    LoadUnitsIntoSteps();
     OnLoadComplete();
 }

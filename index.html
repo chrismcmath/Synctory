@@ -26,6 +26,11 @@
                  <div class="deco_column" id="step_outer_right"></div>
 			 </div>
              <div id="locations">
+                 <div id="new_location" onclick="OnNewLocation()">
+                     <div id="add_location_container">
+                         <div id="add_location">&#9679;</div> 
+                     </div> 
+                 </div> 
              </div> 
          </div>
      </div>
@@ -43,15 +48,7 @@
     <script src="files/scriptLoader.js"></script>
 
     <script src="files/jquery.elastic.source-modified.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-// <![CDATA[
-    jQuery.noConflict();
-    jQuery(document).ready(function(){          
-            jQuery('.unit_script').elastic();
-            jQuery('.unit_script').trigger('update');
-            }); 
-// ]]>
-    </script>
+    <script type="text/javascript"> jQuery.noConflict(); </script>
 
 
 </body>

@@ -46,7 +46,7 @@ function LoadScript(parsedJSON) {
     LoadScriptSteps(stepsJSON);
     var unitsJSON = parsedJSON.units;
     LoadScriptUnits(unitsJSON);
-    LoadUnitsIntoScripts();
+    LoadUnitsIntoSteps();
     OnLoadComplete();
 }
 
@@ -54,7 +54,6 @@ function LoadScriptLocations(locationsJSON) {
     locations = [];
     $$('.location').dispose();
     Array.each(locationsJSON, function(locationJSON, index) {
-        UpdateKeyGenerator(LOCATION_ID, locationJSON.key);
         LoadLocation(locationJSON.key, locationJSON.name);
     });
 }
@@ -63,7 +62,6 @@ function LoadScriptSteps(stepsJSON) {
     steps = [];
     $$('.step').dispose();
     Array.each(stepsJSON, function(stepJSON, index) {
-        UpdateKeyGenerator(STEP_ID, stepJSON.key);
         LoadStep(stepJSON.key, stepJSON.stamp);
     });
 
@@ -82,45 +80,35 @@ function LoadScriptSteps(stepsJSON) {
 function LoadScriptUnits(unitsJSON) {
     units = [];
     Array.each(unitsJSON, function(unitJSON, index) {
-        UpdateKeyGenerator(UNIT_ID, unitJSON.key);
-        var unit = new Unit(
-                unitJSON.key,
+        LoadUnit(unitJSON.key,
                 unitJSON.location,
                 unitJSON.steps,
                 unitJSON.entities,
                 unitJSON.text,
                 unitJSON.active);
-        units.push(unit);
     });
-    $$('.unit').dispose();
-    Array.each(units, function(unit, index) {
-        if ($(GetLocationIDFromKey(unit.LocationKey)) == null) {
-            alert('Could not find location with key ' + unit.LocationKey);
-            //CreateNewLocation(unit.LocationKey);
-        }
-        unit.CreateUnitHTML();
-        $(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
-    });
-
-    jQuery('.unit_script').elastic();
-    jQuery('.unit_script').trigger('update');
+    //$$('.unit').dispose();
 }
 
-function LoadUnitsIntoScripts() {
+function LoadUnitsIntoSteps() {
     Array.each(units, function(unit, index) {
-        Array.each(unit.Steps, function(stepKey, index) {
-            var step = GetStepFromKey(stepKey);
-            console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
-            if (step != null) {
-                step.AddUnit(unit);
-            }
-        });
-        var terminalStepKey = unit.GetLastStepKey();
-        var lastStep = GetStepFromKey(terminalStepKey);
-        if (lastStep != null) {
-            lastStep.AddUnitTerminal(unit);
+        LoadUnitIntoSteps(unit);
+    });
+}
+
+function LoadUnitIntoSteps(unit) {
+    Array.each(unit.Steps, function(stepKey, index) {
+        var step = GetStepFromKey(stepKey);
+        console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
+        if (step != null) {
+            step.AddUnit(unit);
         }
     });
+    var terminalStepKey = unit.GetLastStepKey();
+    var lastStep = GetStepFromKey(terminalStepKey);
+    if (lastStep != null) {
+        lastStep.AddUnitTerminal(unit);
+    }
 }
 
 function SaveFile() {
