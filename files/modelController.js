@@ -48,7 +48,7 @@ function OnSaveClicked() {
 function OnNewLocation() {
     LoadLocation(LOCATION_ID++, 'NEW LOCATION');
     steps.each(function(step, index) {
-        var unit = LoadUnit(UNIT_ID, locations.getLast().Key, [step.Key], [], "", false);
+        var unit = LoadUnit(UNIT_ID++, locations.getLast().Key, [step.Key], [], "", false);
         LoadUnitIntoSteps(unit);
     });
     Refresh();
@@ -84,6 +84,19 @@ function InsertNewStep(prevStepKey) {
         newStep.UnitTerminals.push(unit);
     });
     prevStep.UnitTerminals.empty();
+}
+
+function CreateNewStep() {
+    var step = LoadStep(STEP_ID++, 'New Step');
+    locations.each(function(location, index) {
+        var unit = LoadUnit(UNIT_ID++, location.Key, [step.Key], [], "", false);
+        LoadUnitIntoSteps(unit);
+    });
+    Refresh();
+}
+
+function IsTerminalStep(step) {
+    return steps.indexOf(step) == steps.length - 1;
 }
 
 function UpdateKeyGenerator(generatorID, keyString) {
@@ -122,6 +135,7 @@ function LoadStep(key, stamp) {
     steps.push(step);
     step.CreateDiv();
     $('step_panel').adopt(step.Div);
+    return step;
 }
 
 function LoadUnit(key, location, steps, entities, text, active) {

@@ -148,6 +148,10 @@ var Unit = new Class({
 
         jQuery(this.TextDiv).elastic();
         jQuery('.unit_script').trigger('update');
+
+        if (IsTerminalStep(GetStepFromKey(this.GetLastStepKey()))) {
+            CreateNewStep();
+        }
     },
 
 
@@ -206,6 +210,10 @@ var Unit = new Class({
         if (nextStep.RequestGrowth(this)) {
             terminalStep.RemoveUnitTerminal(this);
             this.Steps.push(nextStep.Key);
+
+            if (IsTerminalStep(nextStep)) {
+                CreateNewStep();
+            }
 
             Refresh();
         }
