@@ -281,10 +281,12 @@ var Unit = new Class({
     },
 
     HasConflict: function(text) {
+        if (!this.Active) return;
         this.SetColourScheme('black', 'white');
     },
 
     NoConflict: function(text) {
+        if (!this.Active) return;
         this.SetColourScheme('white', 'black');
     },
 
