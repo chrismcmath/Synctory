@@ -2,14 +2,14 @@ var Page = {
     initialize: function() {
         // nice one David Walsh	(via rickyh.co.uk)
 
-        if($("footerTab")){
-            $("footerTab").set('morph', {
+        if(document.id("footerTab")){
+            document.id("footerTab").set('morph', {
                 duration: 500,
                 transition: 'Sine:out'
             });
             setTimeout(function(){
 
-                $("footerTab").morph({
+                document.id("footerTab").morph({
                     'bottom': ['-27px','0px']
                 });
 
@@ -44,7 +44,7 @@ var Page = {
 
             },
             onTick: function(position,state,enters,leaves) {
-                $("step_panel").style.top = -position.y+"px";
+                document.id("step_panel").style.top = -position.y+"px";
             },
             container: window
         }); 

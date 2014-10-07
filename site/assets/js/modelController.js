@@ -127,10 +127,10 @@ function LoadLocation(key, name) {
         html:'<p>'+location.Name+'</p>',
         'class': 'location_title'
     });
-    $(titleColumnDiv).adopt(titleDiv);
-    $(locationDiv).adopt(titleColumnDiv);
-    $('locations').adopt(locationDiv);
-    locationDiv.inject($('new_location'), 'before');
+    document.id(titleColumnDiv).adopt(titleDiv);
+    document.id(locationDiv).adopt(titleColumnDiv);
+    document.id('locations').adopt(locationDiv);
+    locationDiv.inject(document.id('new_location'), 'before');
 }
 
 function LoadStep(key, stamp) {
@@ -138,7 +138,7 @@ function LoadStep(key, stamp) {
     var step = new Step(key, stamp);
     steps.push(step);
     step.CreateDiv();
-    $('step_panel').adopt(step.Div);
+    document.id('step_panel').adopt(step.Div);
     return step;
 }
 
@@ -148,7 +148,7 @@ function LoadUnit(key, location, steps, entities, text, active) {
     units.push(unit);
 
     unit.CreateUnitHTML();
-    $(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
+    document.id(GetLocationIDFromKey(unit.LocationKey)).adopt(unit.Div);
 
     jQuery(unit.TextDiv).elastic();
     jQuery('.unit_script').trigger('update');

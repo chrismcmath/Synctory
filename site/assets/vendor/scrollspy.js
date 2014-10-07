@@ -9,16 +9,16 @@ var ScrollSpy = new Class({
     mode: 'vertical',
     max: 0,
     container: window,
-    onEnter: $empty,
-    onLeave: $empty,
-    onTick: $empty
+    onEnter: document.id.empty,
+    onLeave: document.id.empty,
+    onTick: document.id.empty
     },
 
     /* initialization */
     initialize: function(options) {
         /* set options */
         this.setOptions(options);
-        this.container = $(this.options.container);
+        this.container = document.id(this.options.container);
         this.enters = this.leaves = 0;
         this.max = this.options.max;
 

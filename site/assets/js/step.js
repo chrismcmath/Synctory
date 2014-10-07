@@ -97,7 +97,7 @@ var Step = new Class({
             text: this.Stamp,
             'class': 'step_stamp clear_all'
         });
-        $(this.Div).adopt(stampDiv);
+        document.id(this.Div).adopt(stampDiv);
     },
 
     CheckEntityConflict: function() {
