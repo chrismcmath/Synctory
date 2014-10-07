@@ -4,6 +4,97 @@
     border: 0;
 }
 
+.blocker {
+    height: 100%;
+    width: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.9);
+}
+
+.overlay_background {
+    position: relative;
+    width: 600px;
+    top: 20%;
+    margin: auto;
+    background: white;
+    border-radius: 5px;
+}
+
+.credentials_header {
+    width: 80%;
+    height: 35px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.overlay_vertical_fill {
+    width: 80%;
+    height: 20px;
+}
+
+.credentials_row {
+    height: 200px;
+}
+
+.wide_text { 
+    color: black;
+    font-size: 20px;
+    letter-spacing: 20px;
+    text-align: center;
+}
+
+.credentials_box {
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+
+.input_form {
+}
+
+.input_form form{
+    width: 100%;
+}
+
+input {
+    width: 100%;
+}
+
+.input_fields {
+    width: 80%;
+    margin: auto;
+}
+
+.buttons {
+    margin: auto;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.extended_button {
+    background: white;
+    color: black;
+    border: 1px solid black;
+    display: inline-block;
+    width:  100px;
+    text-align: center;
+    padding: 10px;
+}
+
+#register {
+}
+
+#sign_in {
+}
+
 #header {
     height: 30px;
     width: 100%;

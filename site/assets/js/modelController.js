@@ -20,6 +20,10 @@ function OnLoadComplete() {
     Refresh();
 }
 
+function OnOverlayClicked() {
+    console.log('OnOverlayClicked');
+}
+
 function Refresh() {
     Array.each(units, function(unit, index) {
         unit.Div.setStyle('height', null);

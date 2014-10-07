@@ -1,0 +1,390 @@
+.clear_all {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.blocker {
+    height: 100%;
+    width: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.9);
+}
+
+.overlay_background {
+    position: relative;
+    width: 600px;
+    top: 20%;
+    margin: auto;
+    background: white;
+    border-radius: 5px;
+}
+
+.credentials_header {
+    width: 80%;
+    height: 35px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.overlay_vertical_fill {
+    width: 80%;
+    height: 20px;
+}
+
+.wide_text { 
+    color: black;
+    font-size: 20px;
+    letter-spacing: 20px;
+    text-align: center;
+}
+
+.credentials_box {
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+
+.input_form {
+}
+
+.input_form form{
+    width: 100%;
+}
+
+input {
+    width: 100%;
+}
+
+.input_fields {
+    width: 80%;
+    margin: auto;
+}
+
+.buttons {
+    margin: auto;
+    width: 300px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.extended_button {
+    background: white;
+    color: black;
+    border: 1px solid black;
+    display: inline-block;
+    width:  100px;
+    text-align: center;
+    padding: 10px;
+}
+
+#header {
+    height: 30px;
+    width: 100%;
+    background: black;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    color: white;
+}
+
+#header p {
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+}
+
+.header_button {
+    position: relative;
+    display: inline-block;
+    height: 27px;
+    width: 27px;
+    background: black;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+}
+
+#header_load_button {
+    margin-left: 69px;
+}
+
+#header_save_button {
+    margin-left: 1px;
+}
+
+.deco_row {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+}
+
+#step_outer_bottom {
+    bottom:0px;
+    background: white;
+}
+#step_mid_bottom {
+    bottom:1px;
+    background: black;
+}
+#step_inner_bottom {
+    bottom:2px;
+    background: white;
+}
+
+.step_stamp {
+    overflow: scroll;
+    height: 100%;
+}
+
+#locations{
+    font-size:72px;
+    width:3000px;
+    margin-left:100px;
+    margin-top:30px;
+}
+
+#new_location {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 350px;
+    height: 100%;
+}
+
+#add_location_container {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+#add_location {
+    background: transparent;
+    color: white;
+    position: absolute;
+    text-align: center;
+    font-size: 50px;
+    width: 0;
+    margin: -25px 0 0 -25px;
+    top: 50%;
+    left: 50%;
+}
+
+.location {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 350px;
+    height: 100%;
+}
+
+.location_title_column {
+    position: absolute;
+}
+
+.location_title {
+    position: relative;
+    top: 50%;
+    color: #fff;
+    // hardcoded;
+    width: 0; 
+    height: 20px;
+    //text-shadow:1px 1px 0 #444444;
+    font-size: 50px;
+    z-index: 0;
+
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.location_title p {
+    float: right;
+    white-space: nowrap;
+}
+
+#step_panel {
+    position: fixed;
+    width: 100px;
+    min-height: 100%;
+    background: #000;
+    color: #fff;
+    margin-top: 30px;
+    z-index: 1;
+}
+
+.step {
+    // step panel is fixed at 100px width, save three for columns;
+    width: 97px;
+    min-height: 50px;
+    padding: 0;
+    margin: 0;
+    background: white;
+    color: black;
+    margin-top: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.deco_column {
+    position: absolute;
+    height: 100%;
+    width: 1px;
+}
+
+#step_outer_right {
+    right:0px;
+    background: white;
+}
+#step_mid_right {
+    right:1px;
+    background: black;
+}
+#step_inner_right {
+    right:2px;
+    background: white;
+}
+
+/*
+.step_actions {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    bottom: 0px;
+    background-color: blue;
+}
+*/
+
+.unit {
+    background: #fff;
+    //box-shadow: 2px 2px 1px #555; going for monochrome look;
+    min-height: 100px;
+    width:90%;
+    border-radius: 5px;
+    margin-left: 10%;
+    margin-top: 10px;
+    position: relative;
+    z-index: 0;
+}
+
+.unit textarea{
+    /*border: 1px solid gray;*/
+    outline: none;
+    border: 0;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: courier;
+    font-size:15px;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    resize:none;
+    overflow: hidden;
+}
+
+.unit_inactive {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.add_unit {
+    background: transparent;
+    color: white;
+    position: absolute;
+    text-align: center;
+    font-size: 50px;
+    width: 0;
+    margin: -25px 0 0 -25px;
+    top: 50%;
+    left: 50%;
+}
+
+.unit_header {
+    position: relative;
+    top: 0px;
+    height: 20px;
+    font-size: 20px;
+    color: black;
+}
+
+.unit_header:hover {
+    cursor: pointer;
+}
+
+.unit_footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    height: 20px;
+    font-size: 20px;
+    color: black;
+}
+
+.unit_footer:hover {
+    cursor: pointer;
+}
+
+.unit_button {
+    position: relative;
+    display: inline-block;
+    width:50%;
+    height: 100%;
+    text-align: center;
+    color: black;
+}
+
+.close_unit {
+}
+
+.split_unit {
+}
+
+.grow_unit {
+}
+
+.shrink_unit {
+}
+
+.unit_divide {
+    position: absolute;
+    height: 1px;
+    left: 0;
+    right: 0;
+    width: 90%;
+    margin: 0 auto;
+    background: black;
+}
+
+.unit_divide_header {
+    bottom: 0px;
+}
+
+.unit_divide_footer {
+    top: 0px;
+}
+
