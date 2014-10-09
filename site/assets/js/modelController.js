@@ -10,6 +10,9 @@ window.addEvent('domready', function() {
     UNIT_ID = 0;
 
     LoadDefaultView();
+
+    //debug
+    document.id('credentials').setStyle('display', 'none');
 });
 
 function HandleFileSelect(evt) {
@@ -45,8 +48,17 @@ function OnLoadClicked() {
     document.getElementById('file').click();
 }
 
+function OnOpenClicked() {
+    console.log("OnOpenClicked()");
+}
+
+function OnPrintClicked() {
+    console.log("OnPrintClicked()");
+}
+
+// Unused
 function OnSaveClicked() {
-    SaveFile();
+    //SaveFile();
 }
 
 function OnNewLocation() {

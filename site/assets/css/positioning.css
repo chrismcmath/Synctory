@@ -1,8 +1,21 @@
+/* Generic */
+
+.no_select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .clear_all {
     margin: 0;
     padding: 0;
     border: 0;
 }
+
+/* Specific */
 
 .blocker {
     height: 100%;
@@ -102,25 +115,37 @@ input {
     height: 100%;
     width: 100%;
     top: 0px;
+    margin-top: 2px;
 }
 
 .header_button {
     position: relative;
     display: inline-block;
-    height: 27px;
-    width: 27px;
+    padding: 2px;
     background: black;
     border: 1px solid white;
     color: white;
     text-align: center;
+    font-size: 10px;
+    float: left;
+    margin-top: 4px;
 }
 
-#header_load_button {
+.header_button:hover {
+    cursor: pointer;
+}
+
+#header_open_button {
     margin-left: 69px;
 }
 
-#header_save_button {
+#header_print_button {
     margin-left: 1px;
+}
+
+#header_sign_out_button {
+    float: right;
+    margin-right: 20px;
 }
 
 .deco_row {
