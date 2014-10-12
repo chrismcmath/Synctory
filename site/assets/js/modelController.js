@@ -1,4 +1,5 @@
 var AUTOSAVE_PERIOD = 30000; //autosave every 30 seconds
+var PreviousScrollHeight = 0;
 
 document.getElementById('file').addEventListener('change', HandleFileSelect, false);
 
@@ -14,7 +15,6 @@ window.addEvent('domready', function() {
     STEP_ID = 0;
     LOCATION_ID = 0;
     UNIT_ID = 0;
-
 
     $('.overlay').click(function( event ) {
         event.stopPropagation();
@@ -359,6 +359,29 @@ function LoadLocation(key, name) {
     document.id(locationDiv).adopt(titleColumnDiv);
     document.id('locations').adopt(locationDiv);
     locationDiv.inject(document.id('new_location'), 'before');
+    locationDiv.addEvent('click', function(event){
+        event.stop();
+        Rename("RENAME LOCATION", name, function(value) {
+            location.name = value;
+            titleDiv.getChildren('p')[0].textContent= location.name;
+        });
+    });
+}
+
+function Rename(title, placeholder, callback) {
+    $('#rename_overlay .overlay_header')[0].textContent = title;
+    $('#rename_overlay input[name=value]')[0].value = placeholder;
+    $('#rename_overlay input[name=value]')[0].select();
+    $('#rename_overlay').show();
+    $('#confirm_rename')[0].addEvent('click', function(){
+        var newValue = $('#rename_overlay input[name=value]')[0].value;
+        if (newValue != "") {
+            callback(newValue);
+            HideAllOverlays();
+        } else {
+            DisplayErrorMsg(["Please input a new value"]);
+        }
+    });
 }
 
 function LoadStep(key, stamp) {
@@ -382,6 +405,22 @@ function LoadUnit(key, location, steps, entities, text, active) {
     jQuery('.unit_script').trigger('update');
 
     return unit;
+}
+
+function ResetScript() {
+    CurrentScriptID = "";
+    title = "";
+    author = "";
+    $('#header_title').text(title);
+
+    var script = {
+        title: title,
+        author: author,
+        steps: [],
+        locations: [],
+        units: []
+    };
+    LoadScript(script);
 }
 
 // NOTE: Ideally this would be done straight from a json file
@@ -434,4 +473,13 @@ function IsLegalEntityChar(c) {
     var bool = (c.length === 1 && c.test(/[A-Z]/) || c === " ");
     //console.log('IsLegalEntityChar letter: ' + c + ' result: ' + bool);
     return bool;
+}
+
+//When our page gets taller, we need to update scrollspy
+function CheckHeightIncrease() {
+    if (PreviousScrollHeight < document.body.getScrollHeight()) {
+        Page.initialize();
+        PreviousScrollHeight = document.body.getScrollHeight();
+        console.log("reset page height to " + PreviousScrollHeight);
+    }
 }

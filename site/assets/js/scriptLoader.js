@@ -99,7 +99,7 @@ function LoadUnitsIntoSteps() {
 function LoadUnitIntoSteps(unit) {
     Array.each(unit.Steps, function(stepKey, index) {
         var step = GetStepFromKey(stepKey);
-        console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
+        //console.log('load ' + step + ' (' + stepKey + ') ' + ' with unit ' + unit.Key);
         if (step != null) {
             step.AddUnit(unit);
         }

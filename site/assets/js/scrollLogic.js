@@ -51,5 +51,3 @@ var Page = {
         stepPanel.fireEvent('tick',[stepPanel.container.getScroll(),stepPanel.inside,stepPanel.enters,stepPanel.leaves]);
     }
 }
-
-window.addEvent("domready", Page.initialize);

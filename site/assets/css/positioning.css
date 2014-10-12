@@ -42,7 +42,6 @@
 }
 
 .overlay_header {
-    width: 80%;
     height: 35px;
     margin: auto;
     padding-top: 10px;
@@ -469,6 +468,20 @@ input {
     background: transparent;
     border: none;
     box-shadow: none;
+}
+
+.unit_inactive:after {
+    content: '';
+    position: absolute;
+    width: 1%;
+    height: 1%;
+    border: 1px solid white;
+    left: 49.5%; top: 49.5%;
+    background: white;
+}
+
+.unit_inactive:hover {
+    cursor: pointer;
 }
 
 .add_unit {

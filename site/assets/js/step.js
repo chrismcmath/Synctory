@@ -98,6 +98,7 @@ var Step = new Class({
             'class': 'step_stamp clear_all'
         });
         document.id(this.Div).adopt(stampDiv);
+        CheckHeightIncrease();
     },
 
     CheckEntityConflict: function() {

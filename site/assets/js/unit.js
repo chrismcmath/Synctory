@@ -40,6 +40,7 @@ var Unit = new Class({
         if (!this.Active) {
             this.MakeInactive();
         }
+        CheckHeightIncrease();
     },
 
     CreateActive: function() {
@@ -123,11 +124,13 @@ var Unit = new Class({
             });
         });
 
+        /*
         var plusDiv = new Element("div", {
             html: '&#9679;',
             'class': 'add_unit'
         });
         this.Div.adopt(plusDiv);
+        */
         this.Div.addClass('unit_inactive');
 
         var unit = this;
@@ -143,7 +146,7 @@ var Unit = new Class({
         this.Active = true;
         this.Text = "New Unit";
         this.Entities = [];
-        this.Div.getElements('.add_unit').dispose();
+        //this.Div.getElements('.add_unit').dispose();
         Array.each(this.Div.getElements('.unit_activated'), function (child, index) {
             child.set({
                 styles: {
@@ -176,7 +179,7 @@ var Unit = new Class({
         }
     },
     OnClose: function() {
-        if (!confirm("This will delete the unit, are you sure?")) return;
+        console.log("OnClose");
 
         while (this.Steps.length > 1) {
             this.OnShrink();

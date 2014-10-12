@@ -42,6 +42,7 @@ function OnSignIn() {
 
 function OnSignOut() {
     hoodie.account.signOut().done(function (user) {
+        ResetScript();
         CheckUser();
     });
 }
