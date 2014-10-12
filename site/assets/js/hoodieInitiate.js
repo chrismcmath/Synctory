@@ -1,11 +1,12 @@
 "use strict";
 var hoodie  = new Hoodie();
+var SCRIPT_TYPE  = "script";
 
 function CheckUser() {
-    if(hoodie.account.username){
-        document.id('credentials').setStyle('display', 'none');
-    }else{
-        document.id('credentials').setStyle('display', 'block');
+    if (hoodie.account.username){
+        DisplayMyScripts();
+    } else {
+        ShowCredentials();
     }
 }
 
@@ -24,6 +25,7 @@ function OnSignUp() {
         })
         .fail(function (user) {
             console.log('OnSignUp fail');
+            DisplayErrorMsg(["User already exists","Please choose a new name or Sign In"]);
         });
 }
 
@@ -34,6 +36,7 @@ function OnSignIn() {
         })
         .fail(function (user) {
             console.log('OnSignIn fail');
+            DisplayErrorMsg(["Sign in error","Please check your username/password"]);
         });
 }
 
@@ -42,6 +45,32 @@ function OnSignOut() {
         CheckUser();
     });
 }
+
+function GetUserScripts(callback) {
+    hoodie.store.findAll(function(object){
+        if(object.type === SCRIPT_TYPE){
+            return true;
+        }
+    }).done(callback);
+}
+
+function NewScript(title, author) {
+    var attributes = {title: title, author: author};
+    hoodie.store.add(SCRIPT_TYPE, attributes)
+        .done(function (newScript) {
+            CurrentScriptID = newScript.id;
+            OnNewScriptCreated();
+        });
+}
+
+function SaveScript(script) {
+    console.log("about to save");
+    hoodie.store.update(SCRIPT_TYPE, CurrentScriptID, script)
+        .done(function (savedScript) {
+            OnScriptSaved();
+        });
+}
+
 
 hoodie.account.on('authenticated', function (user) {console.log("authenticated");});
 hoodie.account.on('signup', function (user) {console.log("signup");});

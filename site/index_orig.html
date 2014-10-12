@@ -5,18 +5,14 @@
 <link rel="shortcut icon" href="">
 <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="assets/css/positioning.css" type="text/css" media="screen">
+<link rel="stylesheet" href="assets/css/example.css">
 <link rel="stylesheet" href="assets/css/stroll.css">
 
 </head>
 <body>
-    <div id="error_msg_holder">
-        <div id="error_msg" style="opacity: 0">
-        </div>
-    </div>
-
     <div id="credentials" class="overlay">
         <div class="overlay_background">
-            <div class="overlay_header wide_text" style="letter-spacing:normal">S  <span style="color:white; background:black;">Y  N  C</span>  T  O  R  Y</div>
+            <div class="overlay_header wide_text">SYNCTORY</div>
             <div class="unit_divide"></div>
             <div class="overlay_vertical_fill"></div>
             <div class="overlay_row">
@@ -27,7 +23,7 @@
                         <input type="text" class="form-control" name="password" placeholder="password">
                     </form>
                 </div>
-                <div class="buttons buttons_two">
+                <div class="buttons">
                     <div class="extended_button" onclick="OnSignUp()">SIGN UP</div>
                     <div class="extended_button" onclick="OnSignIn()">SIGN IN</div>
                 </div>
@@ -37,21 +33,23 @@
         </div>
     </div>
 
-    <div id="open_overlay" class="overlay">
+    <div id="open_overlay" class="overlay" onclick="HideOverlay()">
         <div class="overlay_background">
             <div class="overlay_header wide_text">MY SCRIPTS</div>
             <div class="unit_divide"></div>
             <div class="overlay_vertical_fill"></div>
             <div class="overlay_row">
-                <ul id="script_list" class="cards">
-                    <li onclick="OnNewFileClicked(event)" class="permanent">
-                    <span class="script_title">New Script</span>
-                    <span class="script_date"></span>
-                    </li>
-                    <li onclick="OnCopyFileClicked()" class="permanent">
-                    <span class="script_title">Copy Current Script to New</span>
-                    <span class="script_date"></span>
-                    </li>
+                <ul class="curl">
+                    <li>Hello</li>
+                    <li>Bye</li>
+                    <li>Hello</li>
+                    <li>Bye</li>
+                    <li>Hello</li>
+                    <li>Bye</li>
+                    <li>Hello</li>
+                    <li>Bye</li>
+                    <li>Hello</li>
+                    <li>Bye</li>
                 </ul>
             </div>
             <div class="overlay_row">
@@ -62,41 +60,12 @@
         </div>
     </div>
 
-    <div id="create_overlay" class="overlay">
-        <div class="overlay_background">
-            <div class="overlay_header wide_text">NEW SCRIPT</div>
-            <div class="unit_divide"></div>
-            <div class="overlay_vertical_fill"></div>
-            <div class="overlay_row">
-                <div class="input_fields">
-                    <form class="input_form form-signin" role="form">
-                        <br>
-                        <input type="text" class="form-control" name="title" placeholder="My New Script Title"><br><br>
-                        <input type="text" class="form-control" name="author" placeholder="Author(s) name">
-                    </form>
-                </div>
-                <div class="buttons buttons_one">
-                    <div class="extended_button" onclick="OnCreateNewScript()">CREATE</div>
-                </div>
-            </div>
-            <div class="unit_divide"></div>
-            <div class="overlay_vertical_fill"></div>
-        </div>
-    </div>
-
 	<div id="wrap">
         <div id="header">
-            <div class="header_button no_select" id="header_open_button" onclick="OnOpenClicked()">MY SCRIPTS</div><div class="header_button header_tailing_button no_select" id="header_print_button" onclick="OnPrintClicked()">PRINT SCRIPT</div><div class="header_button header_tailing_button no_select" id="header_save_icon" style="opacity:0">SAVING...</div>
-
+            <div class="header_button no_select" id="header_open_button" onclick="OnLoadClicked()">MY SCRIPTS</div><div class="header_button no_select" id="header_print_button" onclick="OnSaveClicked()">PRINT SCRIPT</div>
             <div class="header_button no_select" id="header_sign_out_button" onclick="OnSignOut()">SIGN OUT</div>
-            <div class="header_button no_select" id="header_username">username</div>
             <input type="file" id="file" style="display:none"/>
-            <div id="header_title" style="pointer-events:none">
-                <span>
-                    adsf;lkasdf;lkasdjf ;lkasdjf ;lkasdjf;lka sdjf;lasdj f;laskdj f;alsdkj fa;slkdjf ;alskdjf ;lkasdjf ;laskdjf
-                </span>
-                
-                </div>
+            <p style="pointer-events:none"> S Y N C T O R Y </p>
             <div class="deco_row" id="step_inner_bottom"></div>
             <div class="deco_row" id="step_mid_bottom"></div>
             <div class="deco_row" id="step_outer_bottom"></div>
@@ -123,11 +92,11 @@
     <script src="/_api/_files/hoodie.js"></script>
 	<script src="assets/vendor/mootools-core-1.5.1-full-compat-yc.js" type="text/javascript"> </script>
 	<script src="assets/vendor/stroll.min.js" type="text/javascript"> </script>
-    <script> stroll.bind( '#open_overlay ul' ); </script>
+    <script src="js/stroll.min.js"></script>
+    <script> stroll.bind( '#main ul' ); </script>
 
 
 	<script src="assets/vendor/FileSaver.min.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jstween-1.1.min.js" type="text/javascript"> </script>
 	<script src="assets/vendor/scrollspy.js" type="text/javascript"> </script>
 	<script src="assets/js/scrollLogic.js" type="text/javascript"> </script>
 

@@ -31,20 +31,20 @@ function LoadFile(file) {
         return function (e) { 
             JsonObj = e.target.result
             //console.log(JsonObj);
-            var parsedJSON = JSON.parse(JsonObj);
-            LoadScript(parsedJSON);
+            var script = JSON.parse(JsonObj);
+            LoadScript(script);
         };
     })(file);
 
     reader.readAsText(file, 'UTF-8');
 }
 
-function LoadScript(parsedJSON) {
-    var locationsJSON = parsedJSON.locations;
+function LoadScript(script) {
+    var locationsJSON = script.locations;
     LoadScriptLocations(locationsJSON);
-    var stepsJSON = parsedJSON.steps;
+    var stepsJSON = script.steps;
     LoadScriptSteps(stepsJSON);
-    var unitsJSON = parsedJSON.units;
+    var unitsJSON = script.units;
     LoadScriptUnits(unitsJSON);
     LoadUnitsIntoSteps();
     OnLoadComplete();
@@ -111,7 +111,13 @@ function LoadUnitIntoSteps(unit) {
     }
 }
 
-function SaveFile() {
+function ExportSynctoryFile() {
+    jsonString = JSON.encode(GetSaveObject());
+    var jsonBlob = new Blob([jsonString], {type: "text/plain;charset=utf-8"});
+    saveAs(jsonBlob, "blob_test.synctory");
+}
+
+function GetSaveObject() {
     var jObj = {};
     jObj.title = "title";
     jObj.author = "author";
@@ -119,10 +125,7 @@ function SaveFile() {
     jObj.steps = GetStepJSON();
     jObj.units = GetUnitJSON();
 
-    var jsonString = JSON.encode(jObj);
-
-    var jsonBlob = new Blob([jsonString], {type: "text/plain;charset=utf-8"});
-    saveAs(jsonBlob, "blob_test.synctory");
+    return jObj;
 }
 
 function GetLocationJSON() {
@@ -149,13 +152,16 @@ function GetStepJSON() {
 
 function GetUnitJSON() {
     var unitJSON = [];
-    Array.each(units, function(unit, index) {
-        var u = {};
-        u.location = unit.LocationKey;
-        u.steps = unit.Steps;
-        u.entites = unit.Entites;
-        u.text = unit.TextDiv.value;
-        unitJSON.push(u);
+    Array.each(steps, function(step, index) {
+        Array.each(step.UnitTerminals, function(unit, index) {
+            var u = {};
+            u.location = unit.LocationKey;
+            u.steps = unit.Steps;
+            u.entites = unit.Entites;
+            u.text = unit.TextDiv.value;
+            u.active = unit.Active;
+            unitJSON.push(u);
+        });
     });
     return unitJSON;
 }

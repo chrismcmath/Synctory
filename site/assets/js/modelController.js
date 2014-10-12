@@ -1,3 +1,5 @@
+var AUTOSAVE_PERIOD = 30000; //autosave every 30 seconds
+
 document.getElementById('file').addEventListener('change', HandleFileSelect, false);
 
 window.addEvent('domready', function() {
@@ -5,26 +7,191 @@ window.addEvent('domready', function() {
     locations = [];
     units = [];
 
+    CurrentScriptID = "";
+
     STEP_ID = 0;
     LOCATION_ID = 0;
     UNIT_ID = 0;
 
-    LoadDefaultView();
 
-    //debug
-    document.id('credentials').setStyle('display', 'none');
+    $('.overlay').click(function( event ) {
+        event.stopPropagation();
+        HideAllOverlays();
+    });
+    $('.overlay_background').click(function( event ) {
+        event.stopPropagation();
+    });
+    HideAllOverlays(); // will check if logged in/ script loaded etc
 });
+
+window.setInterval(function(){
+    if (CurrentScriptID != "") {
+        OnSaveScript();
+    }
+}, AUTOSAVE_PERIOD);
+      
+function ShowCredentials() {
+    $('.overlay').hide();
+    $('#credentials').show();
+}
 
 function HandleFileSelect(evt) {
     LoadFile(evt.target.files[0]); // FileList object
 }   
 
-function OnLoadComplete() {
-    Refresh();
+function HideOverlay() {
+    $('.overlay').hide();
+
+    CheckCurrentState();
 }
 
-function OnOverlayClicked() {
-    console.log('OnOverlayClicked');
+function CheckCurrentState() {
+    return CheckLoggedIn() && CheckScriptSelected();
+}
+
+function CheckLoggedIn() {
+    if (!hoodie.account.username) {
+        alert('ERROR: user is not logged in');
+        ShowCredentials();
+        return false;
+    }
+    return true;
+}
+
+function CheckScriptSelected() {
+    if (CurrentScriptID === "") {
+        alert('ERROR: script not selected');
+        DisplayMyScripts();
+        return false;
+    }
+    return true;
+}
+
+function OnNewFileClicked(event) {
+    event.stopPropagation()
+
+    // Just a simple switch
+    // Can't just HideAllOverlays here- edge case that we might not have a script ID yet
+    $('#open_overlay').hide();
+    $('#create_overlay').show();
+}
+
+function OnCreateNewScript () {
+    var title = $('#create_overlay input[name=title]')[0].value;
+    var author = $('#create_overlay input[name=author]')[0].value;
+
+    var errorMsgs = new Array();
+    if (title === "") {
+        errorMsgs.push("Please input a title");
+    }
+    if (author === "") {
+        errorMsgs.push("Please input an author");
+    }
+
+    if (errorMsgs.length == 0) {
+        NewScript(title, author);
+    } else {
+        DisplayErrorMsg(errorMsgs);
+    }
+}
+
+function DisplayErrorMsg(errorMsgs) {
+    $('#error_msg').empty();
+
+    Array.each(errorMsgs, function(msg, index) {
+        $('<p/>', {
+            text: msg
+        }).appendTo('#error_msg');
+    });
+
+    TweenErrorMsgIn();
+}
+
+function TweenErrorMsgIn() {
+    $('#error_msg').tween({
+        opacity:{
+            start: 0,
+        stop: 100,
+        time: 0,
+        duration: 1,
+        effect:'easeInOut',
+        onStop: function(){
+            TweenErrorMsgOut();
+        }
+        }
+    });
+
+    $.play();
+}
+
+function TweenErrorMsgOut() {
+    $('#error_msg').tween({
+        opacity:{
+            start: 100,
+        stop: 0,
+        time: 1,
+        duration: 1,
+        effect:'easeInOut'
+        }
+    });
+
+    $.play();
+}
+
+function OnCopyFileClicked() {
+    console.log('OnCopyFileClicked');
+}
+
+function DisplayMyScripts() {
+    $('#open_overlay').show();
+
+    if (!CheckLoggedIn()) return;
+
+    $('#script_list li').remove(":not(.permanent)");
+    GetUserScripts(function (scripts) {
+        var sortedList = sortByKey(scripts, 'updatedAt').reverse();
+        Array.each(sortedList, function(script, index) {
+            LoadScriptIntoList(script.title, script.updatedAt.split('T')[0], function (evt) {
+                CurrentScriptID = script.id;
+                LoadScript(script);
+                HideAllOverlays();
+            });
+        });
+    });
+}
+
+//kudos http://stackoverflow.com/questions/20692010/sort-array-and-get-first-key-in-jquery
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
+function LoadScriptIntoList(title, date, callback) {
+    var listItem = $('<li/>', {
+        on: {
+            click: callback
+        }
+    }).appendTo('#script_list');
+
+    $('<span/>', {
+        "class": "script_title",
+        text: title
+    }).appendTo(listItem);
+    jQuery('<span/>', {
+        "class": "script_date",
+        text: date
+    }).appendTo(listItem);
+}
+
+function HideAllOverlays() {
+    $('.overlay').hide();
+    CheckCurrentState();
+}
+
+function OnLoadComplete() {
+    Refresh();
 }
 
 function Refresh() {
@@ -44,21 +211,60 @@ function RefreshFrom(step_key) {
 */
 
 function OnLoadClicked() {
+    /*
     console.log("OnLoadClicked()");
     document.getElementById('file').click();
+    */
 }
 
 function OnOpenClicked() {
-    console.log("OnOpenClicked()");
+    DisplayMyScripts();
 }
 
 function OnPrintClicked() {
     console.log("OnPrintClicked()");
 }
 
-// Unused
-function OnSaveClicked() {
-    //SaveFile();
+/*
+hoodie.remote.on('update', function (updatedObject) {
+    console.log('updated to the cloud!')}
+    );
+    */
+
+function OnNewScriptCreated() {
+    LoadDefaultView();
+    HideAllOverlays();
+}
+
+function OnSaveScript() {
+    $('#header_save_icon').text("SAVING...");
+    $('#header_save_icon').tween({
+        opacity:{
+            start: 0,
+        stop: 100,
+        time: 0,
+        duration: 0.2,
+        effect:'easeInOut'
+        }
+    });
+    $.play();
+
+    var script = GetSaveObject();
+    SaveScript(script);
+}
+
+function OnScriptSaved() {
+    $('#header_save_icon').text("SAVED");
+    $('#header_save_icon').tween({
+        opacity:{
+            start: 100,
+        stop: 0,
+        time: 0,
+        duration: 1,
+        effect:'easeInOut'
+        }
+    });
+    $.play();
 }
 
 function OnNewLocation() {
