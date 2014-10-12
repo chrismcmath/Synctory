@@ -119,8 +119,8 @@ function ExportSynctoryFile() {
 
 function GetSaveObject() {
     var jObj = {};
-    jObj.title = "title";
-    jObj.author = "author";
+    jObj.title = title;
+    jObj.author = author;
     jObj.locations = GetLocationJSON();
     jObj.steps = GetStepJSON();
     jObj.units = GetUnitJSON();

@@ -58,7 +58,7 @@ function NewScript(title, author) {
     var attributes = {title: title, author: author};
     hoodie.store.add(SCRIPT_TYPE, attributes)
         .done(function (newScript) {
-            CurrentScriptID = newScript.id;
+            SetCurrentScript(newScript);
             OnNewScriptCreated();
         });
 }

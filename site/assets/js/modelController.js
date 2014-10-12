@@ -3,6 +3,8 @@ var AUTOSAVE_PERIOD = 30000; //autosave every 30 seconds
 document.getElementById('file').addEventListener('change', HandleFileSelect, false);
 
 window.addEvent('domready', function() {
+    title = "";
+    author = "";
     steps = [];
     locations = [];
     units = [];
@@ -29,7 +31,14 @@ window.setInterval(function(){
         OnSaveScript();
     }
 }, AUTOSAVE_PERIOD);
-      
+
+function SetCurrentScript(script) {
+    CurrentScriptID = script.id;
+    title = script.title;
+    author = script.author;
+    $('#header_title').text(title);
+}
+
 function ShowCredentials() {
     $('.overlay').hide();
     $('#credentials').show();
@@ -54,8 +63,10 @@ function CheckLoggedIn() {
         alert('ERROR: user is not logged in');
         ShowCredentials();
         return false;
+    } else {
+        $('#header_username').text(hoodie.account.username);
+        return true;
     }
-    return true;
 }
 
 function CheckScriptSelected() {
@@ -74,6 +85,8 @@ function OnNewFileClicked(event) {
     // Can't just HideAllOverlays here- edge case that we might not have a script ID yet
     $('#open_overlay').hide();
     $('#create_overlay').show();
+    $('#create_overlay input[name=author]')[0].placeholder =
+        "Author's name (" + hoodie.account.username + ") by default";
 }
 
 function OnCreateNewScript () {
@@ -83,9 +96,6 @@ function OnCreateNewScript () {
     var errorMsgs = new Array();
     if (title === "") {
         errorMsgs.push("Please input a title");
-    }
-    if (author === "") {
-        errorMsgs.push("Please input an author");
     }
 
     if (errorMsgs.length == 0) {
@@ -152,7 +162,7 @@ function DisplayMyScripts() {
         var sortedList = sortByKey(scripts, 'updatedAt').reverse();
         Array.each(sortedList, function(script, index) {
             LoadScriptIntoList(script.title, script.updatedAt.split('T')[0], function (evt) {
-                CurrentScriptID = script.id;
+                SetCurrentScript(script);
                 LoadScript(script);
                 HideAllOverlays();
             });

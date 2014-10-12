@@ -216,6 +216,10 @@ input {
     text-overflow: ellipsis;
 }
 
+.point_on_hover:hover {
+    cursor: pointer;
+}
+
 #header_title span {
     white-space: nowrap;
 }

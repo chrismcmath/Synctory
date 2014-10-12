@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div id="error_msg_holder">
+    <div id="error_msg_holder" style="pointer-events:none">
         <div id="error_msg" style="opacity: 0">
         </div>
     </div>
@@ -23,8 +23,8 @@
                 <div class="input_fields">
                     <form class="input_form form-signin" role="form">
                         <br>
-                        <input type="text" class="form-control" name="username" placeholder="someone@example.com"><br><br>
-                        <input type="text" class="form-control" name="password" placeholder="password">
+                        <input type="text" class="form-control" name="username" placeholder="my_username"><br><br>
+                        <input type="password" class="form-control" name="password" placeholder="password">
                     </form>
                 </div>
                 <div class="buttons buttons_two">
@@ -91,11 +91,8 @@
             <div class="header_button no_select" id="header_sign_out_button" onclick="OnSignOut()">SIGN OUT</div>
             <div class="header_button no_select" id="header_username">username</div>
             <input type="file" id="file" style="display:none"/>
-            <div id="header_title" style="pointer-events:none">
-                <span>
-                    adsf;lkasdf;lkasdjf ;lkasdjf ;lkasdjf;lka sdjf;lasdj f;laskdj f;alsdkj fa;slkdjf ;alskdjf ;lkasdjf ;laskdjf
-                </span>
-                
+            <div id="header_title" class="point_on_hover no_select">
+                <span> </span>
                 </div>
             <div class="deco_row" id="step_inner_bottom"></div>
             <div class="deco_row" id="step_mid_bottom"></div>
