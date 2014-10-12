@@ -27,7 +27,7 @@ var Page = {
             },
             onTick: function(position,state,enters,leaves) {
                 $$(".location_title_column").each(function(title)  {
-                    title.style.top = position.y+"px";
+                    title.style.top = (position.y + 5) +"px";
                 }); 
             },
             container: window

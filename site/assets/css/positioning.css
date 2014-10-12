@@ -339,9 +339,8 @@ input {
     color: #fff;
     // hardcoded;
     width: 0; 
-    height: 20px;
+    height: 10px;
     //text-shadow:1px 1px 0 #444444;
-    font-size: 50px;
     z-index: 0;
 
     /* Safari */
@@ -360,9 +359,15 @@ input {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+.location_title:hover {
+    cursor: pointer;
+}
+
 .location_title p {
     float: right;
     white-space: nowrap;
+    font-weight: 100;
+    font-size: 40px;
 }
 
 #step_panel {

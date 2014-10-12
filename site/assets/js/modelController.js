@@ -220,11 +220,10 @@ function RefreshFrom(step_key) {
 }
 */
 
-function OnLoadClicked() {
-    /*
-    console.log("OnLoadClicked()");
+function OnImportSynctoryFileClicked() {
+    console.log("OnImportSynctoryFileClicked()");
     document.getElementById('file').click();
-    */
+    console.log("OnImportSynctoryFileClicked() end");
 }
 
 function OnOpenClicked() {
@@ -233,6 +232,7 @@ function OnOpenClicked() {
 
 function OnPrintClicked() {
     console.log("OnPrintClicked()");
+    OnImportSynctoryFileClicked();
 }
 
 /*
@@ -242,7 +242,7 @@ hoodie.remote.on('update', function (updatedObject) {
     */
 
 function OnNewScriptCreated() {
-    LoadDefaultView();
+    InitialiseScript();
     HideAllOverlays();
 }
 
@@ -386,7 +386,39 @@ function LoadUnit(key, location, steps, entities, text, active) {
 
 // NOTE: Ideally this would be done straight from a json file
 //       but having problem with File/Blob so hardcoding for now
-function LoadDefaultView() {
+function InitialiseScript() {
+    var script = {
+        title: title,
+        author: author,
+        steps: [{
+            "key": 0,
+            "stamp": "Step 1"
+        },{
+            "key": 1,
+            "stamp": "Step 2"
+        }],
+        locations: [{
+            "key": 0,
+            "name": "INT. CLICK TO RENAME"
+        }],
+        units: [{
+            active: true,
+            location: "0",
+            steps: [0],
+            entities: [],
+            text: "Empty Unit"
+        },{
+            active: false,
+            location: "0",
+            steps: [1],
+            entities: [],
+            text: ""
+        }]
+    };
+    LoadScript(script);
+}
+
+function LoadTutorialScript() {
     LoadStep('0', 'This is a step.\nIt measures an arbitrary amount of time.\n Everything on this row is happening simultenously.\nClick to rename it.');
     LoadStep('1', '00:01:34 \n "The clock strikes eleven"');
     LoadLocation('0', 'CLICK TO NAME LOCATION');
