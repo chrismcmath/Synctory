@@ -242,7 +242,7 @@ input {
 }
 
 #header_open_button {
-    margin-left: 39px;
+    margin-left: 4px;
 }
 
 .header_tailing_button {
@@ -261,7 +261,7 @@ input {
 
 #header_sign_out_button {
     float: right;
-    margin-right: 20px;
+    margin-right: 4px;
 }
 
 .deco_row {
@@ -286,6 +286,8 @@ input {
 .step_stamp {
     overflow: scroll;
     height: 100%;
+    padding: 4px;
+    font-weight: 100;
 }
 
 #locations{
@@ -374,7 +376,7 @@ input {
     position: fixed;
     width: 100px;
     min-height: 100%;
-    background: #000;
+    background: white;
     color: #fff;
     margin-top: 30px;
     z-index: 1;
@@ -382,15 +384,20 @@ input {
 
 .step {
     // step panel is fixed at 100px width, save three for columns;
-    width: 97px;
+    width: 96px;
+    margin: 0;
+    margin-left: 4px;
     min-height: 50px;
     padding: 0;
-    margin: 0;
-    background: white;
-    color: black;
-    margin-top: 10px;
+    background: black;
+    color: white;
+    margin-top: 4px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+
+.step:hover {
+    cursor: pointer;
 }
 
 .deco_column {
@@ -431,7 +438,7 @@ input {
     width:90%;
     border-radius: 5px;
     margin-left: 10%;
-    margin-top: 10px;
+    margin-top: 4px;
     position: relative;
     z-index: 0;
 }
