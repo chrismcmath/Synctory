@@ -291,18 +291,13 @@ input {
 }
 
 #locations{
+    position: relative;
+    //clear: both;
+    //width:3000px;
     font-size:72px;
-    width:3000px;
     margin-left:100px;
     margin-top:30px;
-}
-
-#new_location {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    width: 350px;
-    height: 100%;
+    white-space: nowrap;
 }
 
 #add_location_container {
@@ -324,12 +319,23 @@ input {
 }
 
 .location {
-    position: relative;
+    //position: relative;
     display: inline-block;
+    //float: left;
     vertical-align: top;
     width: 350px;
     height: 100%;
 }
+
+#new_location {
+    //position: relative;
+    display: inline-block;
+    //float: left;
+    vertical-align: top;
+    width: 350px;
+    height: 100%;
+}
+
 
 .location_title_column {
     position: absolute;
