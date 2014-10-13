@@ -65,6 +65,17 @@ function NewScript(title, author) {
         });
 }
 
+function CopyScript(copiedTitle) {
+    var script = GetSaveObject();
+    script.title = copiedTitle;
+    hoodie.store.add(SCRIPT_TYPE, script)
+        .done(function (copiedScript) {
+            SetCurrentScript(copiedScript);
+            LoadScript(script);
+            HideAllOverlays();
+        });
+}
+
 function SaveScript(script) {
     console.log("about to save");
     hoodie.store.update(SCRIPT_TYPE, CurrentScriptID, script)

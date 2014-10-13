@@ -102,7 +102,7 @@ var Step = new Class({
         var step = this;
         this.Div.addEvent('click', function(event){
             event.stop();
-            Rename("STAMP STEP", GetCurrentStepStamp(key), function(value) {
+            Rename("STAMP STEP", step.Stamp, false, function(value) {
                 step.Stamp = value;
                 step.Div.getElement('.step_stamp').textContent= step.Stamp;
             });

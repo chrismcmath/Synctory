@@ -65,7 +65,7 @@
                     <span class="script_title">New Script</span>
                     <span class="script_date"></span>
                     </li>
-                    <li onclick="OnCopyFileClicked()" class="permanent">
+                    <li onclick="OnCopyScriptClicked(event)" class="permanent">
                     <span class="script_title">Copy Current Script to New</span>
                     <span class="script_date"></span>
                     </li>
@@ -99,6 +99,25 @@
         </div>
     </div>
 
+    <div id="copy_overlay" class="overlay">
+        <div class="overlay_background">
+            <div class="overlay_header wide_text">COPY SCRIPT TO NEW</div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+            <div class="overlay_row">
+                <div class="input_fields">
+                        <br>
+                        <input type="text" class="form-control" name="title" placeholder=""><br><br>
+                </div>
+                <div class="buttons buttons_one">
+                    <div class="extended_button" onclick="OnCopyScriptToNew()">COPY</div>
+                </div>
+            </div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+        </div>
+    </div>
+
 	<div id="wrap">
         <div id="header">
             <div class="header_button no_select" id="header_open_button" onclick="OnOpenClicked()">MY SCRIPTS</div><div class="header_button header_tailing_button no_select" id="header_print_button" onclick="OnPrintClicked()">PRINT SCRIPT</div><div class="header_button header_tailing_button no_select" id="header_save_icon" style="opacity:0">SAVING...</div>
@@ -119,7 +138,9 @@
              <div id="locations">
                  <div id="new_location" onclick="OnNewLocation()">
                      <div id="add_location_container">
-                         <div id="add_location">&#9679;</div> 
+                         <div id="add_location">
+                             <div class="header_button no_select">NEW LOCATION</div>
+                         </div> 
                      </div> 
                  </div> 
              </div> 

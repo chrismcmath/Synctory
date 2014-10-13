@@ -36,7 +36,7 @@ window.setInterval(function(){
 function SetupTitle() {
     $('#header_title').click(function(event){
         event.stopPropagation();
-        Rename("RENAME SCRIPT", title, function(value) {
+        Rename("RENAME SCRIPT", title, false, function(value) {
             title = value;
             $('#header_title').text(value);
         });
@@ -71,7 +71,6 @@ function CheckCurrentState() {
 
 function CheckLoggedIn() {
     if (!hoodie.account.username) {
-        alert('ERROR: user is not logged in');
         ShowCredentials();
         return false;
     } else {
@@ -82,7 +81,6 @@ function CheckLoggedIn() {
 
 function CheckScriptSelected() {
     if (CurrentScriptID === "") {
-        alert('ERROR: script not selected');
         DisplayMyScripts();
         return false;
     }
@@ -90,7 +88,7 @@ function CheckScriptSelected() {
 }
 
 function OnNewFileClicked(event) {
-    event.stopPropagation()
+    event.stopPropagation();
 
     // Just a simple switch
     // Can't just HideAllOverlays here- edge case that we might not have a script ID yet
@@ -98,6 +96,19 @@ function OnNewFileClicked(event) {
     $('#create_overlay').show();
     $('#create_overlay input[name=author]')[0].placeholder =
         "Author's name (" + hoodie.account.username + ") by default";
+}
+
+function OnCopyScriptClicked(event) {
+    event.stopPropagation();
+
+    if (CurrentScriptID === "") {
+        DisplayErrorMsg(['Cannot copy, no script currently selected']);
+        return;
+    }
+
+    $('#open_overlay').hide();
+    $('#copy_overlay').show();
+    $('#copy_overlay input[name=title]').val(title);
 }
 
 function OnCreateNewScript () {
@@ -115,6 +126,24 @@ function OnCreateNewScript () {
         DisplayErrorMsg(errorMsgs);
     }
 }
+
+function OnCopyScriptToNew () {
+    var newTitle = $('#copy_overlay input[name=title]').val();
+
+    var errorMsgs = new Array();
+    if (newTitle === "") {
+        errorMsgs.push("Please input a title");
+    } else if (newTitle === title) {
+        errorMsgs.push("Please give your copy a unique name");
+    }
+
+    if (errorMsgs.length == 0) {
+        CopyScript(newTitle);
+    } else {
+        DisplayErrorMsg(errorMsgs);
+    }
+}
+
 
 function DisplayErrorMsg(errorMsgs) {
     $('#error_msg').empty();
@@ -238,6 +267,7 @@ function OnImportSynctoryFileClicked() {
 }
 
 function OnOpenClicked() {
+    OnSaveScript();
     DisplayMyScripts();
 }
 
@@ -372,14 +402,19 @@ function LoadLocation(key, name) {
     locationDiv.inject(document.id('new_location'), 'before');
     titleDiv.addEvent('click', function(event){
         event.stop();
-        Rename("RENAME LOCATION", name, function(value) {
+        Rename("RENAME LOCATION", name, true, function(value) {
             location.Name = value;
             titleDiv.getChildren('p')[0].textContent= location.Name;
         });
     });
 }
 
-function Rename(title, placeholder, callback) {
+function Rename(title, placeholder, caps, callback) {
+    if (caps === true) {
+        $('#rename_overlay input')[0].addClass("all_caps");
+    } else {
+        $('#rename_overlay input')[0].removeClass("all_caps");
+    }
     $('#rename_overlay .overlay_header')[0].textContent = title;
     $('#rename_overlay input[name=value]')[0].value = placeholder;
     $('#rename_overlay input[name=value]')[0].select();
@@ -387,6 +422,7 @@ function Rename(title, placeholder, callback) {
     $('#confirm_rename')[0].addEvent('click', function(){
         var newValue = $('#rename_overlay input[name=value]')[0].value;
         if (newValue != "") {
+            if (caps) newValue = newValue.toUpperCase();
             callback(newValue);
             HideAllOverlays();
             $('#confirm_rename')[0].removeEvents();
