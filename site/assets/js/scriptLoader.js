@@ -167,6 +167,22 @@ function GetUnitJSON() {
 }
 
 /* Utils */
+function GetLocationFromKey(locationKey) {
+    var returnLocation = null;
+    locations.some(function(location) {
+        if (location.Key == locationKey) {
+            returnLocation = location;
+            return true;
+        } else {
+            return false;
+        }
+    });
+    return returnLocation;
+}
+
+function GetCurrentLocationName(key) {
+    return GetLocationFromKey(key).Name;
+}
 
 function GetStepFromKey(stepKey) {
     var returnStep = null;
@@ -179,6 +195,10 @@ function GetStepFromKey(stepKey) {
         }
     });
     return returnStep;
+}
+
+function GetCurrentStepStamp(key) {
+    return GetStepFromKey(key).Stamp;
 }
 
 function GetLocationIDFromKey(key) {

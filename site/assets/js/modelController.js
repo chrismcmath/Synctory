@@ -16,6 +16,7 @@ window.addEvent('domready', function() {
     LOCATION_ID = 0;
     UNIT_ID = 0;
 
+    SetupTitle();
     $('.overlay').click(function( event ) {
         event.stopPropagation();
         HideAllOverlays();
@@ -31,6 +32,16 @@ window.setInterval(function(){
         OnSaveScript();
     }
 }, AUTOSAVE_PERIOD);
+
+function SetupTitle() {
+    $('#header_title').click(function(event){
+        event.stopPropagation();
+        Rename("RENAME SCRIPT", title, function(value) {
+            title = value;
+            $('#header_title').text(value);
+        });
+    });
+}
 
 function SetCurrentScript(script) {
     CurrentScriptID = script.id;
@@ -359,11 +370,11 @@ function LoadLocation(key, name) {
     document.id(locationDiv).adopt(titleColumnDiv);
     document.id('locations').adopt(locationDiv);
     locationDiv.inject(document.id('new_location'), 'before');
-    locationDiv.addEvent('click', function(event){
+    titleDiv.addEvent('click', function(event){
         event.stop();
         Rename("RENAME LOCATION", name, function(value) {
-            location.name = value;
-            titleDiv.getChildren('p')[0].textContent= location.name;
+            location.Name = value;
+            titleDiv.getChildren('p')[0].textContent= location.Name;
         });
     });
 }
@@ -378,6 +389,7 @@ function Rename(title, placeholder, callback) {
         if (newValue != "") {
             callback(newValue);
             HideAllOverlays();
+            $('#confirm_rename')[0].removeEvents();
         } else {
             DisplayErrorMsg(["Please input a new value"]);
         }

@@ -98,6 +98,16 @@ var Step = new Class({
             'class': 'step_stamp clear_all'
         });
         document.id(this.Div).adopt(stampDiv);
+
+        var step = this;
+        this.Div.addEvent('click', function(event){
+            event.stop();
+            Rename("STAMP STEP", GetCurrentStepStamp(key), function(value) {
+                step.Stamp = value;
+                step.Div.getElement('.step_stamp').textContent= step.Stamp;
+            });
+        });
+
         CheckHeightIncrease();
     },
 
