@@ -527,3 +527,10 @@ function CheckHeightIncrease() {
         console.log("reset page height to " + PreviousScrollHeight);
     }
 }
+
+function RemoveTrailingCharacters(str) {
+    if (str.length > 4 && str[str.length -2] === " ") {
+        str = str.substr(0, str.length - 2);
+    }
+    return str;
+}

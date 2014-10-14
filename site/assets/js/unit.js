@@ -255,7 +255,8 @@ var Unit = new Class({
 
                 var trimmedCandidate = candidate.trim();
                 if (trimmedCandidate.length > 1) {
-                    entities.push(trimmedCandidate);
+                    var finalCandidate = RemoveTrailingCharacters(trimmedCandidate);
+                    entities.push(finalCandidate);
                 }
             }
         }
