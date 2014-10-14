@@ -33,6 +33,41 @@
         </div>
     </div>
 
+    <div id="print_overlay" class="overlay">
+        <div class="overlay_background">
+            <div class="overlay_header wide_text">PRINT SCRIPTS</div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+            <div class="overlay_row">
+                    <div class="print_button" onclick="OnPrintByEntity()">BY ENTITY</div>
+                    <div class="print_button" onclick="OnPrintByLocation()">BY LOCATION</div>
+                    <div class="print_button" onclick="OnExportSynctory()">EXPORT .SYNCTORY</div>
+            </div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+        </div>
+    </div>
+
+    <div id="print_entity_overlay" class="overlay">
+        <div class="overlay_background">
+            <div class="overlay_header wide_text">PRINT ENTITY</div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+            <div class="overlay_row">
+                <ul id="entity_list" class="wave">
+                    <li onclick="OnPrintAllEntities(event)" class="permanent">
+                    <span class="script_title">PRINT ALL</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="overlay_row">
+
+            </div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+        </div>
+    </div>
+
     <div id="credentials" class="overlay">
         <div class="overlay_background">
             <div class="overlay_header wide_text" style="letter-spacing:normal">S  <span style="color:white; background:black;">Y  N  C</span>  T  O  R  Y</div>
@@ -60,14 +95,12 @@
             <div class="unit_divide"></div>
             <div class="overlay_vertical_fill"></div>
             <div class="overlay_row">
-                <ul id="script_list" class="cards">
+                <ul id="script_list" class="wave">
                     <li onclick="OnNewFileClicked(event)" class="permanent">
-                    <span class="script_title">New Script</span>
-                    <span class="script_date"></span>
+                    New Script
                     </li>
                     <li onclick="OnCopyScriptClicked(event)" class="permanent">
-                    <span class="script_title">Copy Current Script to New</span>
-                    <span class="script_date"></span>
+                    Copy Current Script to New
                     </li>
                 </ul>
             </div>
@@ -151,12 +184,23 @@
     <script src="/_api/_files/hoodie.js"></script>
 	<script src="assets/vendor/mootools-core-1.5.1-full-compat-yc.js" type="text/javascript"> </script>
 	<script src="assets/vendor/stroll.min.js" type="text/javascript"> </script>
-    <script> stroll.bind( '#open_overlay ul' ); </script>
-
 
 	<script src="assets/vendor/FileSaver.min.js" type="text/javascript"> </script>
 	<script src="assets/vendor/jstween-1.1.min.js" type="text/javascript"> </script>
 	<script src="assets/vendor/scrollspy.js" type="text/javascript"> </script>
+	<script src="assets/vendor/fountain.min.js" type="text/javascript"> </script>
+
+	<script src="assets/vendor/jspdf/jspdf.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.from_html.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.cell.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.standard_fonts_metrics.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.addimage.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.ie_below_9_shim.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.javascript.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.sillysvgrenderer.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.plugin.split_text_to_size.js" type="text/javascript"> </script>
+	<script src="assets/vendor/jspdf/jspdf.PLUGINTEMPLATE.js" type="text/javascript"> </script>
+
 	<script src="assets/js/scrollLogic.js" type="text/javascript"> </script>
 
     <script src="assets/js/unit.js"></script>
@@ -164,6 +208,7 @@
     <script src="assets/js/step.js"></script>
     <script src="assets/js/modelController.js"></script>
     <script src="assets/js/scriptLoader.js"></script>
+    <script src="assets/js/scriptPrinter.js"></script>
     <script src="assets/js/hoodieInitiate.js"></script>
 
     <script src="assets/vendor/jquery.elastic.source-modified.js" type="text/javascript" charset="utf-8"></script>

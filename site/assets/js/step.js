@@ -111,12 +111,16 @@ var Step = new Class({
         CheckHeightIncrease();
     },
 
-    GetDupes: function() {
+    GetAllEntities: function() {
         var entities = [];
         this.LocationUnitHash.each(function(unit, location) {
             entities.append(unit.Entities);
         });
+        return entities;
+    },
 
+    GetDupes: function() {
+        var entities = this.GetAllEntities();
         var dupes = [];
         Array.each(entities, function (entity, index) {
             if (entities.filter(function(e) { return e == entity; }).length > 1) {

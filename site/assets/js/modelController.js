@@ -24,6 +24,9 @@ window.addEvent('domready', function() {
     $('.overlay_background').click(function( event ) {
         event.stopPropagation();
     });
+    stroll.bind( '#open_overlay ul' );
+    stroll.bind( '#print_entity_overlay ul' );
+    stroll.bind( '#print_location_overlay ul' );
     HideAllOverlays(); // will check if logged in/ script loaded etc
 });
 
@@ -118,6 +121,9 @@ function OnCreateNewScript () {
     var errorMsgs = new Array();
     if (title === "") {
         errorMsgs.push("Please input a title");
+    }
+    if (author === "") {
+        author = hoodie.account.username;
     }
 
     if (errorMsgs.length == 0) {
@@ -229,9 +235,22 @@ function LoadScriptIntoList(title, date, callback) {
         "class": "script_title",
         text: title
     }).appendTo(listItem);
-    jQuery('<span/>', {
+    $('<span/>', {
         "class": "script_date",
         text: date
+    }).appendTo(listItem);
+}
+
+function LoadEntityIntoList(entity, callback) {
+    var listItem = $('<li/>', {
+        on: {
+            click: callback
+        }
+    }).appendTo('#entity_list');
+
+    $('<span/>', {
+        "class": "script_title",
+        text: entity
     }).appendTo(listItem);
 }
 
@@ -272,8 +291,44 @@ function OnOpenClicked() {
 }
 
 function OnPrintClicked() {
-    console.log("OnPrintClicked()");
-    OnImportSynctoryFileClicked();
+    HideAllOverlays();
+    $('#print_overlay').show();
+}
+
+function OnPrintByEntity() {
+    HideAllOverlays();
+    $('#print_entity_overlay').show();
+    //TODO: check no errors before printing
+
+    $('#entity_list li').remove(":not(.permanent)");
+    var entities = GetAllEntities();
+    Array.each(entities, function(entity, index) {
+        LoadEntityIntoList(entity, function (evt) {
+            console.log(entity + ' clicked');
+            var unitSequence = new Array();
+            Array.each(steps, function(step, index) {
+                Array.each(step.UnitTerminals, function(unit, index) {
+                    //console.log("s: " + step.Key + " u.k: " + unit.Key + " u.e: " + unit.Entities + " contains " + entity + " ? " + unit.Entities.contains(entity));
+                    if (unit.Entities.contains(entity)) {
+                        unitSequence.push(unit);
+                        return;
+                    }
+                });
+            });
+            PrintSequence(entity, unitSequence);
+        });
+    });
+}
+
+function OnPrintAllEntities() {
+}
+
+function OnPrintByLocation() {
+    //OnImportSynctory();
+}
+
+function OnExportSynctory() {
+    //OnImportSynctory();
 }
 
 function OnNewScriptCreated() {
@@ -534,3 +589,12 @@ function RemoveTrailingCharacters(str) {
     }
     return str;
 }
+
+function GetAllEntities() {
+    var entities = new Array();
+    Array.each(steps, function(step, index) {
+        entities.push.apply(entities, step.GetAllEntities());
+    });
+    return jQuery.unique(entities).sort();
+}
+
