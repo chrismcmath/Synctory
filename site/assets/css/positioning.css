@@ -506,7 +506,7 @@ input {
 }
 
 .unit_header {
-    position: relative;
+    position: absolute;
     top: 0px;
     height: 20px;
     width: 100%;
