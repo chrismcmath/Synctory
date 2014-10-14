@@ -265,14 +265,17 @@ var Unit = new Class({
             if (!entities.contains(entity)) {
                 entityChanged = true;
                 unit.Entities.erase(entity);
+                console.log("rv: " + entity);
             }
         });
 
         /*Add new removed entities*/
+        var unit = this;
         Array.each(entities, function (entity, index) {
             if (!unit.Entities.contains(entity)) {
                 entityChanged = true;
                 unit.Entities.push(entity);
+                console.log("add: " + entity);
             }
         });
 
@@ -285,7 +288,13 @@ var Unit = new Class({
 
     HasConflict: function(text) {
         if (!this.Active) return;
-        this.SetColourScheme('black', 'white');
+        this.SetColourScheme('red', 'white');
+        this.SetConflictSpans(text);
+    },
+
+    SetConflictSpans: function(text) {
+        this.TextDiv.innerHTML.replace(new RegExp(text, 'g'), '<span style="background: white>' + text + '</span>');
+        debugger;
     },
 
     NoConflict: function(text) {

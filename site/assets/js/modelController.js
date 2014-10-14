@@ -276,12 +276,6 @@ function OnPrintClicked() {
     OnImportSynctoryFileClicked();
 }
 
-/*
-hoodie.remote.on('update', function (updatedObject) {
-    console.log('updated to the cloud!')}
-    );
-    */
-
 function OnNewScriptCreated() {
     InitialiseScript();
     HideAllOverlays();
@@ -489,12 +483,14 @@ function InitialiseScript() {
             "name": "INT. CLICK TO RENAME"
         }],
         units: [{
+            key: 0,
             active: true,
             location: "0",
             steps: [0],
             entities: [],
             text: "Empty Unit"
         },{
+            key: 1,
             active: false,
             location: "0",
             steps: [1],

@@ -469,6 +469,11 @@ input {
     overflow: hidden;
 }
 
+textarea span{
+    background: white;
+    color: black;
+}
+
 .all_caps {
     text-transform: uppercase;
 }
@@ -522,6 +527,7 @@ input {
     position: absolute;
     width: 100%;
     bottom: 0px;
+    left: 0px;
     height: 20px;
     font-size: 20px;
     color: black;

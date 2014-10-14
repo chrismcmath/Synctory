@@ -155,9 +155,10 @@ function GetUnitJSON() {
     Array.each(steps, function(step, index) {
         Array.each(step.UnitTerminals, function(unit, index) {
             var u = {};
+            u.key = unit.Key;
             u.location = unit.LocationKey;
             u.steps = unit.Steps;
-            u.entites = unit.Entites;
+            u.entities = unit.Entities;
             u.text = unit.TextDiv.value;
             u.active = unit.Active;
             unitJSON.push(u);

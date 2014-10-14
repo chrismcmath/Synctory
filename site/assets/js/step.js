@@ -132,7 +132,7 @@ var Step = new Class({
             step.LocationUnitHash.each(function(unit, location) {
                 if (unit.Entities.contains(dupe)) {
                     console.log('has conflict');
-                    unit.HasConflict();
+                    unit.HasConflict(dupe);
                 } else {
                     console.log('no conflict');
                     unit.NoConflict();
