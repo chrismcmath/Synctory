@@ -150,7 +150,7 @@ var Unit = new Class({
         Array.each(this.Div.getElements('.unit_activated'), function (child, index) {
             child.set({
                 styles: {
-                    display: 'block'
+                    display: 'inline-block'
                 }
             });
         });
