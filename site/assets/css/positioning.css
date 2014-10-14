@@ -494,6 +494,17 @@ textarea span{
     top: -1px;
 }
 
+.has_conflict:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    border-radius: 5px;
+    top: -1px;
+    pointer-events: none;
+}
+
 .unit_inactive:hover {
     cursor: pointer;
 }

@@ -111,8 +111,7 @@ var Step = new Class({
         CheckHeightIncrease();
     },
 
-    CheckEntityConflict: function() {
-        /* get all entities */
+    GetDupes: function() {
         var entities = [];
         this.LocationUnitHash.each(function(unit, location) {
             entities.append(unit.Entities);
@@ -125,25 +124,43 @@ var Step = new Class({
                 entities.erase(entity);
             }
         });
+        return dupes;
+    },
+
+    CheckEntityConflict: function() {
+        var dupes = this.GetDupes();
 
         var step = this;
         if (dupes.length > 0) {
         Array.each(dupes, function (dupe, index) {
             step.LocationUnitHash.each(function(unit, location) {
+                //console.log("Dupe: " + dupe + " step: " + step.Key + " location: " + location + "unit: " + unit.Key);
                 if (unit.Entities.contains(dupe)) {
-                    console.log('has conflict');
-                    unit.HasConflict(dupe);
+                    //console.log('has conflict');
+                    unit.AddConflict(dupe);
                 } else {
-                    console.log('no conflict');
-                    unit.NoConflict();
+                    //console.log('no conflict');
+                    unit.RemoveConflict();
                 }
             });
         });
         } else {
             step.LocationUnitHash.each(function(unit, location) {
                 console.log('no conflict');
-                unit.NoConflict();
+                unit.RemoveConflict();
             });
         }
+    },
+
+    UnitHasConflict: function(unit) {
+        var hasConflict = false;
+        var dupes = this.GetDupes();
+        Array.each(dupes, function (dupe, index) {
+            if (unit.Entities.contains(dupe)) {
+                hasConflict = true;
+                return;
+            }
+        });
+        return hasConflict;
     }
 });

@@ -10,6 +10,7 @@ var Unit = new Class({
         this.Entities = entities;
         this.Text = text;
         this.Active = active;
+        this._HasConflict = false;
     },
 
     GetLastStepKey: function() {
@@ -112,6 +113,7 @@ var Unit = new Class({
         this.Div.adopt(header);
         this.Div.adopt(this.TextDiv);
         this.Div.adopt(footer);
+
     },
 
     MakeInactive: function() {
@@ -281,25 +283,43 @@ var Unit = new Class({
 
         if (entityChanged) {
             Array.each(this.Steps, function(stepKey, index) {
-                GetStepFromKey(unit.GetLastStepKey()).CheckEntityConflict();
+                GetStepFromKey(stepKey).CheckEntityConflict();
             });
         }
     },
 
-    HasConflict: function(text) {
-        if (!this.Active) return;
-        this.SetColourScheme('red', 'white');
+    AddConflict: function(text) {
+        if (!this.Active || this._HasConflict) return;
+        this.SetColourScheme('black', 'white');
+        this.Div.addClass('has_conflict');
         this.SetConflictSpans(text);
+        this._HasConflict = true;
     },
 
     SetConflictSpans: function(text) {
-        this.TextDiv.innerHTML.replace(new RegExp(text, 'g'), '<span style="background: white>' + text + '</span>');
-        debugger;
+        //TODO
     },
 
-    NoConflict: function(text) {
-        if (!this.Active) return;
+    RemoveConflict: function(text) {
+        if (!this.Active || !this._HasConflict) return;
+
+        //NOTE: Must check if other steps agree no conflict
+        unit = this;
+        var hasConflict = false;
+        if (this.Steps.length > 1) {
+            Array.each(this.Steps, function(stepKey, index) {
+                if (GetStepFromKey(stepKey).UnitHasConflict(unit)) {
+                    console.log('unit still has conflict [' + unit.Text + ']' );
+                    hasConflict = true;
+                    return;
+                };
+            });
+        }
+
+        if (hasConflict) return;
+        this.Div.removeClass('has_conflict');
         this.SetColourScheme('white', 'black');
+        this._HasConflict = false;
     },
 
     SetColourScheme: function(backColour, frontColour) {
