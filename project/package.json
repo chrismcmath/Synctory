@@ -1,6 +1,6 @@
 {
   "name": "synctory",
-  "version": "2.1.1",
+  "version": "2.1.1-3",
   "type": "app",
   "dependencies": {
     "hoodie-server": "^1.2.4",
@@ -69,5 +69,6 @@
   "directories": {},
   "_shasum": "83cc28f7296edeff97021d77edf03af8afd529f1",
   "_resolved": "https://registry.npmjs.org/my-first-hoodie/-/my-first-hoodie-2.1.1.tgz",
-  "readme": "ERROR: No README data found!"
+  "readme": "ERROR: No README data found!",
+  "subdomain": "synctory"
 }

@@ -73,7 +73,7 @@ var Step = new Class({
         //
         var targetedUnit = this.LocationUnitHash[unit.LocationKey];
         if (targetedUnit.Active) {
-            console.log('refuse growth, next thing is active');
+            //console.log('refuse growth, next thing is active');
             return false;
         } else {
             this.LocationUnitHash[unit.LocationKey] = unit;
@@ -150,7 +150,6 @@ var Step = new Class({
         });
         } else {
             step.LocationUnitHash.each(function(unit, location) {
-                console.log('no conflict');
                 unit.RemoveConflict();
             });
         }

@@ -213,6 +213,24 @@ input {
     overflow: scroll;
 }
 
+#loading_cover {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: white;
+    z-index: 1001;
+    top: 0px;
+    left: 0px;
+}
+
+.loading_title {
+    position: absolute;
+    left: 75%;
+    top: 70%;
+    color: black
+    font-size: 30px;
+}
+
 
 #header {
     height: 30px;

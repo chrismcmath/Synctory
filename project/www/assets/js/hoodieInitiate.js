@@ -24,7 +24,6 @@ function OnSignUp() {
             CheckUser();
         })
         .fail(function (user) {
-            console.log('OnSignUp fail');
             DisplayErrorMsg(["User already exists","Please choose a new name or Sign In"]);
         });
 }
@@ -35,7 +34,6 @@ function OnSignIn() {
             CheckUser();
         })
         .fail(function (user) {
-            console.log('OnSignIn fail');
             DisplayErrorMsg(["Sign in error","Please check your username/password"]);
         });
 }
@@ -77,7 +75,6 @@ function CopyScript(copiedTitle) {
 }
 
 function SaveScript(script) {
-    console.log("about to save");
     hoodie.store.update(SCRIPT_TYPE, CurrentScriptID, script)
         .done(function (savedScript) {
             OnScriptSaved();
@@ -85,6 +82,7 @@ function SaveScript(script) {
 }
 
 
+/*
 hoodie.account.on('authenticated', function (user) {console.log("authenticated");});
 hoodie.account.on('signup', function (user) {console.log("signup");});
 hoodie.account.on('changeusername', function (user) {console.log("changeusername");});
@@ -92,4 +90,4 @@ hoodie.account.on('signin', function (user) {console.log("signin");});
 hoodie.account.on('reauthenticated', function (user) {console.log("reauthenticated");});
 hoodie.account.on('signout', function (user) {console.log("signout");});
 hoodie.account.on('unauthenticated', function (user) {console.log("unauthenticated");});
-
+*/

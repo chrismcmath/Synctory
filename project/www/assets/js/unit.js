@@ -181,8 +181,6 @@ var Unit = new Class({
         }
     },
     OnClose: function() {
-        console.log("OnClose");
-
         while (this.Steps.length > 1) {
             this.OnShrink();
         }
@@ -268,7 +266,6 @@ var Unit = new Class({
             if (!entities.contains(entity)) {
                 entityChanged = true;
                 unit.Entities.erase(entity);
-                console.log("rv: " + entity);
             }
         });
 
@@ -278,7 +275,6 @@ var Unit = new Class({
             if (!unit.Entities.contains(entity)) {
                 entityChanged = true;
                 unit.Entities.push(entity);
-                console.log("add: " + entity);
             }
         });
 
@@ -310,7 +306,6 @@ var Unit = new Class({
         if (this.Steps.length > 1) {
             Array.each(this.Steps, function(stepKey, index) {
                 if (GetStepFromKey(stepKey).UnitHasConflict(unit)) {
-                    console.log('unit still has conflict [' + unit.Text + ']' );
                     hasConflict = true;
                     return;
                 };

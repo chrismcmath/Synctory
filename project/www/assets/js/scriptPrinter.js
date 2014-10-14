@@ -2,9 +2,9 @@ function PrintSequence(focus, unitSequence) {
     var scriptString = "Title: " + title + "\nCredit: composed by\nAuthor: " + author + "\nNotes: Focus on\n" + focus + "\n\n";
     var locationKey = "";
     Array.each(unitSequence, function(unit, index) {
-        scriptString += "[" + GetStepFromKey(unit.Steps[0]).Stamp + "]\n";
+        scriptString += "[" + GetStepFromKey(unit.Steps[0]).Stamp + "]\n\n";
         if (unit.LocationKey != locationKey) {
-            scriptString += GetCurrentLocationName(locationKey) + "\n\n";
+            scriptString += GetCurrentLocationName(unit.LocationKey) + "\n\n";
         }
         scriptString += unit.TextDiv.value;
         scriptString += "\n\n";

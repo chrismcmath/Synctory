@@ -1,0 +1,92 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AUTOSAVE_PERIOD	modelController.js	/^var AUTOSAVE_PERIOD = 30000; \/\/autosave every 30 seconds$/;"	v
+CONFLICT_COLOUR	unit.js	/^var CONFLICT_COLOUR = '#FFF5F5';$/;"	v
+CheckCurrentState	modelController.js	/^function CheckCurrentState() {$/;"	f
+CheckHeightIncrease	modelController.js	/^function CheckHeightIncrease() {$/;"	f
+CheckLoggedIn	modelController.js	/^function CheckLoggedIn() {$/;"	f
+CheckScriptSelected	modelController.js	/^function CheckScriptSelected() {$/;"	f
+CheckUser	hoodieInitiate.js	/^function CheckUser() {$/;"	f
+CopyScript	hoodieInitiate.js	/^function CopyScript(copiedTitle) {$/;"	f
+CreateNewStep	modelController.js	/^function CreateNewStep() {$/;"	f
+DisplayErrorMsg	modelController.js	/^function DisplayErrorMsg(errorMsgs) {$/;"	f
+DisplayMyScripts	modelController.js	/^function DisplayMyScripts() {$/;"	f
+ExportSynctoryFile	scriptLoader.js	/^function ExportSynctoryFile() {$/;"	f
+GetCurrentLocationName	scriptLoader.js	/^function GetCurrentLocationName(key) {$/;"	f
+GetCurrentStepStamp	scriptLoader.js	/^function GetCurrentStepStamp(key) {$/;"	f
+GetLocationFromKey	scriptLoader.js	/^function GetLocationFromKey(locationKey) {$/;"	f
+GetLocationIDFromKey	scriptLoader.js	/^function GetLocationIDFromKey(key) {$/;"	f
+GetLocationJSON	scriptLoader.js	/^function GetLocationJSON() {$/;"	f
+GetPassword	hoodieInitiate.js	/^function GetPassword() {$/;"	f
+GetSaveObject	scriptLoader.js	/^function GetSaveObject() {$/;"	f
+GetStepFromKey	scriptLoader.js	/^function GetStepFromKey(stepKey) {$/;"	f
+GetStepJSON	scriptLoader.js	/^function GetStepJSON() {$/;"	f
+GetUnitJSON	scriptLoader.js	/^function GetUnitJSON() {$/;"	f
+GetUserScripts	hoodieInitiate.js	/^function GetUserScripts(callback) {$/;"	f
+GetUsername	hoodieInitiate.js	/^function GetUsername() {$/;"	f
+HandleFileSelect	modelController.js	/^function HandleFileSelect(evt) {$/;"	f
+HideAllOverlays	modelController.js	/^function HideAllOverlays() {$/;"	f
+HideOverlay	modelController.js	/^function HideOverlay() {$/;"	f
+InitialiseScript	modelController.js	/^function InitialiseScript() {$/;"	f
+InitialiseScript.script.author	modelController.js	/^        author: author,$/;"	p
+InitialiseScript.script.steps	modelController.js	/^        steps: [{$/;"	p
+InitialiseScript.script.title	modelController.js	/^        title: title,$/;"	p
+InsertNewStep	modelController.js	/^function InsertNewStep(prevStepKey) {$/;"	f
+IsLegalEntityChar	modelController.js	/^function IsLegalEntityChar(c) {$/;"	f
+IsTerminalStep	modelController.js	/^function IsTerminalStep(step) {$/;"	f
+JSON_FILE	scriptLoader.js	/^var JSON_FILE = "json";$/;"	v
+LoadFile	scriptLoader.js	/^function LoadFile(file) {$/;"	f
+LoadLocation	modelController.js	/^function LoadLocation(key, name) {$/;"	f
+LoadScript	scriptLoader.js	/^function LoadScript(script) {$/;"	f
+LoadScriptIntoList	modelController.js	/^function LoadScriptIntoList(title, date, callback) {$/;"	f
+LoadScriptLocations	scriptLoader.js	/^function LoadScriptLocations(locationsJSON) {$/;"	f
+LoadScriptSteps	scriptLoader.js	/^function LoadScriptSteps(stepsJSON) {$/;"	f
+LoadScriptUnits	scriptLoader.js	/^function LoadScriptUnits(unitsJSON) {$/;"	f
+LoadStep	modelController.js	/^function LoadStep(key, stamp) {$/;"	f
+LoadTutorialScript	modelController.js	/^function LoadTutorialScript() {$/;"	f
+LoadUnit	modelController.js	/^function LoadUnit(key, location, steps, entities, text, active) {$/;"	f
+LoadUnitIntoSteps	scriptLoader.js	/^function LoadUnitIntoSteps(unit) {$/;"	f
+LoadUnitsIntoSteps	scriptLoader.js	/^function LoadUnitsIntoSteps() {$/;"	f
+NO_CONFLICT_COLOUR	unit.js	/^var NO_CONFLICT_COLOUR = 'white';$/;"	v
+NewScript	hoodieInitiate.js	/^function NewScript(title, author) {$/;"	f
+NewScript.attributes.author	hoodieInitiate.js	/^    var attributes = {title: title, author: author};$/;"	p
+NewScript.attributes.title	hoodieInitiate.js	/^    var attributes = {title: title, author: author};$/;"	p
+OnCopyFileClicked	modelController.js	/^function OnCopyFileClicked() {$/;"	f
+OnCopyScriptClicked	modelController.js	/^function OnCopyScriptClicked(event) {$/;"	f
+OnCopyScriptToNew	modelController.js	/^function OnCopyScriptToNew () {$/;"	f
+OnCreateNewScript	modelController.js	/^function OnCreateNewScript () {$/;"	f
+OnImportSynctoryFileClicked	modelController.js	/^function OnImportSynctoryFileClicked() {$/;"	f
+OnLoadComplete	modelController.js	/^function OnLoadComplete() {$/;"	f
+OnNewFileClicked	modelController.js	/^function OnNewFileClicked(event) {$/;"	f
+OnNewLocation	modelController.js	/^function OnNewLocation() {$/;"	f
+OnNewScriptCreated	modelController.js	/^function OnNewScriptCreated() {$/;"	f
+OnOpenClicked	modelController.js	/^function OnOpenClicked() {$/;"	f
+OnPrintClicked	modelController.js	/^function OnPrintClicked() {$/;"	f
+OnSaveScript	modelController.js	/^function OnSaveScript() {$/;"	f
+OnScriptSaved	modelController.js	/^function OnScriptSaved() {$/;"	f
+OnSignIn	hoodieInitiate.js	/^function OnSignIn() {$/;"	f
+OnSignOut	hoodieInitiate.js	/^function OnSignOut() {$/;"	f
+OnSignUp	hoodieInitiate.js	/^function OnSignUp() {$/;"	f
+OnTextareaHeightChanged	modelController.js	/^function OnTextareaHeightChanged() {$/;"	f
+Page.initialize	scrollLogic.js	/^    initialize: function() {$/;"	m
+PreviousScrollHeight	modelController.js	/^var PreviousScrollHeight = 0;$/;"	v
+Refresh	modelController.js	/^function Refresh() {$/;"	f
+Rename	modelController.js	/^function Rename(title, placeholder, caps, callback) {$/;"	f
+ResetScript	modelController.js	/^function ResetScript() {$/;"	f
+ResetScript.script.author	modelController.js	/^        author: author,$/;"	p
+ResetScript.script.steps	modelController.js	/^        steps: [],$/;"	p
+ResetScript.script.title	modelController.js	/^        title: title,$/;"	p
+SCRIPT_TYPE	hoodieInitiate.js	/^var SCRIPT_TYPE  = "script";$/;"	v
+SYNCTORY_FILE	scriptLoader.js	/^var SYNCTORY_FILE = "synctory";$/;"	v
+SaveScript	hoodieInitiate.js	/^function SaveScript(script) {$/;"	f
+SetCurrentScript	modelController.js	/^function SetCurrentScript(script) {$/;"	f
+SetupTitle	modelController.js	/^function SetupTitle() {$/;"	f
+ShowCredentials	modelController.js	/^function ShowCredentials() {$/;"	f
+TweenErrorMsgIn	modelController.js	/^function TweenErrorMsgIn() {$/;"	f
+TweenErrorMsgOut	modelController.js	/^function TweenErrorMsgOut() {$/;"	f
+UpdateKeyGenerator	modelController.js	/^function UpdateKeyGenerator(generatorID, keyString) {$/;"	f
+sortByKey	modelController.js	/^function sortByKey(array, key) {$/;"	f
