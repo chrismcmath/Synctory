@@ -3,10 +3,10 @@ function PrintSequence(focus, unitSequence) {
     var locationKey = "";
     Array.each(unitSequence, function(unit, index) {
         scriptString += "[" + GetStepFromKey(unit.Steps[0]).Stamp + "]\n";
-        if (unit.LocationKey != locationKey && locationKey != "") {
+        if (unit.LocationKey != locationKey) {
             scriptString += GetCurrentLocationName(locationKey) + "\n\n";
         }
-        scriptString += unit.Text;
+        scriptString += unit.TextDiv.value;
         scriptString += "\n\n";
         locationKey = unit.LocationKey;
     });

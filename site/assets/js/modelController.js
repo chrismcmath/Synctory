@@ -195,7 +195,7 @@ function TweenErrorMsgOut() {
 }
 
 function OnCopyFileClicked() {
-    console.log('OnCopyFileClicked');
+    //console.log('OnCopyFileClicked');
 }
 
 function DisplayMyScripts() {
@@ -254,6 +254,19 @@ function LoadEntityIntoList(entity, callback) {
     }).appendTo(listItem);
 }
 
+function LoadLocationIntoList(location, callback) {
+    var listItem = $('<li/>', {
+        on: {
+            click: callback
+        }
+    }).appendTo('#location_list');
+
+    $('<span/>', {
+        "class": "script_title",
+        text: location.Name
+    }).appendTo(listItem);
+}
+
 function HideAllOverlays() {
     $('.overlay').hide();
     CheckCurrentState();
@@ -280,9 +293,7 @@ function RefreshFrom(step_key) {
 */
 
 function OnImportSynctoryFileClicked() {
-    console.log("OnImportSynctoryFileClicked()");
     document.getElementById('file').click();
-    console.log("OnImportSynctoryFileClicked() end");
 }
 
 function OnOpenClicked() {
@@ -296,6 +307,7 @@ function OnPrintClicked() {
 }
 
 function OnPrintByEntity() {
+    OnSaveScript();
     HideAllOverlays();
     $('#print_entity_overlay').show();
     //TODO: check no errors before printing
@@ -304,11 +316,9 @@ function OnPrintByEntity() {
     var entities = GetAllEntities();
     Array.each(entities, function(entity, index) {
         LoadEntityIntoList(entity, function (evt) {
-            console.log(entity + ' clicked');
             var unitSequence = new Array();
             Array.each(steps, function(step, index) {
                 Array.each(step.UnitTerminals, function(unit, index) {
-                    //console.log("s: " + step.Key + " u.k: " + unit.Key + " u.e: " + unit.Entities + " contains " + entity + " ? " + unit.Entities.contains(entity));
                     if (unit.Entities.contains(entity)) {
                         unitSequence.push(unit);
                         return;
@@ -320,11 +330,31 @@ function OnPrintByEntity() {
     });
 }
 
+// Cut for time reasons
 function OnPrintAllEntities() {
 }
 
 function OnPrintByLocation() {
-    //OnImportSynctory();
+    OnSaveScript();
+    HideAllOverlays();
+    $('#print_location_overlay').show();
+    //TODO: check no errors before printing
+
+    $('#entity_list li').remove(":not(.permanent)");
+    Array.each(locations, function(location, index) {
+        LoadLocationIntoList(location, function (evt) {
+            var prevUnit;
+            var unitSequence = new Array();
+            Array.each(steps, function(step, index) {
+                var stepUnit = step.LocationUnitHash[location.Key];
+                if (stepUnit != prevUnit) {
+                    unitSequence.push(stepUnit);
+                    prevUnit = stepUnit
+                }
+            });
+            PrintSequence(location.Name, unitSequence);
+        });
+    });
 }
 
 function OnExportSynctory() {
@@ -384,7 +414,7 @@ function OnTextareaHeightChanged() {
 function InsertNewStep(prevStepKey) {
 
     /* Create new step */
-    console.log('CreateNewStep with id' + STEP_ID);
+    //console.log('CreateNewStep with id' + STEP_ID);
     var newStep = new Step(STEP_ID++, "NEW STEP");
     newStep.CreateDiv();
 
@@ -579,7 +609,7 @@ function CheckHeightIncrease() {
     if (PreviousScrollHeight < document.body.getScrollHeight()) {
         Page.initialize();
         PreviousScrollHeight = document.body.getScrollHeight();
-        console.log("reset page height to " + PreviousScrollHeight);
+        //console.log("reset page height to " + PreviousScrollHeight);
     }
 }
 

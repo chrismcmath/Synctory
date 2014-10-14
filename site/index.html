@@ -50,14 +50,28 @@
 
     <div id="print_entity_overlay" class="overlay">
         <div class="overlay_background">
-            <div class="overlay_header wide_text">PRINT ENTITY</div>
+            <div class="overlay_header wide_text">PRINT BY ENTITY</div>
             <div class="unit_divide"></div>
             <div class="overlay_vertical_fill"></div>
             <div class="overlay_row">
                 <ul id="entity_list" class="wave">
-                    <li onclick="OnPrintAllEntities(event)" class="permanent">
-                    <span class="script_title">PRINT ALL</span>
-                    </li>
+                </ul>
+            </div>
+            <div class="overlay_row">
+
+            </div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+        </div>
+    </div>
+
+    <div id="print_location_overlay" class="overlay">
+        <div class="overlay_background">
+            <div class="overlay_header wide_text">PRINT BY LOCATION</div>
+            <div class="unit_divide"></div>
+            <div class="overlay_vertical_fill"></div>
+            <div class="overlay_row">
+                <ul id="location_list" class="wave">
                 </ul>
             </div>
             <div class="overlay_row">
@@ -189,18 +203,6 @@
 	<script src="assets/vendor/jstween-1.1.min.js" type="text/javascript"> </script>
 	<script src="assets/vendor/scrollspy.js" type="text/javascript"> </script>
 	<script src="assets/vendor/fountain.min.js" type="text/javascript"> </script>
-
-	<script src="assets/vendor/jspdf/jspdf.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.from_html.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.cell.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.standard_fonts_metrics.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.addimage.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.ie_below_9_shim.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.javascript.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.sillysvgrenderer.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.plugin.split_text_to_size.js" type="text/javascript"> </script>
-	<script src="assets/vendor/jspdf/jspdf.PLUGINTEMPLATE.js" type="text/javascript"> </script>
-
 	<script src="assets/js/scrollLogic.js" type="text/javascript"> </script>
 
     <script src="assets/js/unit.js"></script>
