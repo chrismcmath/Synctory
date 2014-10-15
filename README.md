@@ -1,12 +1,19 @@
 # SYNCTORY
 
+
 Synctory is a web tool for building multi-threaded narratives.
 
+* Create complex interweaving narratives.
+* Entity system prevents characters or other unique objects from being in two places at the same time.
+* Files are saved online, allowing you to work on them from anywhere.
+* Uses Fountain to render printable customised scripts (for example, one type for an actor with just their scenes, another for the location director).
+* Can be utilised in any medium that allows for a degree of interactivity.
 
-## What?
-Traditional storytelling implies a passive audience. Increasingly we've seen different artistic mediums play with parallel narratives to weave richer narrative tapestries, but they are still experienced linearly by the audience. With new technologies we now have the capability to make multi-linear narratives for large audiences.
 
-Multi-linear narratives require the viewer to have some choice in which things they observe. Narratives are [happening simultaneously](#terminology); to watch one is to miss out on the other. This allows the artist great opportunities to play with perspective and pacing.
+## Why?
+Traditional storytelling implies a passive audience. Increasingly we've seen different artistic mediums play with parallel narratives to weave richer narrative tapestries, but they are still experienced linearly by the audience. With new technologies we now have the capability to make multi-linear narratives for large audiences. This is a vast unexplored area of storytelling potential.
+
+Multi-linear narratives require the viewer to have some choice in which things they observe. Things are [happening simultaneously](#terminology); to watch one storyline is to miss out on the other. This allows the artist great opportunities to play with perspective, pacing and social dimensions.
 
 Synctory's output is something that looks very much like a film script. This can be used for the creation of immersive plays, interactive films or narrative-based video games.
 
@@ -15,10 +22,10 @@ Synctory's output is something that looks very much like a film script. This can
 
 Synctory uses four concepts to ease the creation of multi-linear narratives. They are
 
-* Locations - where an scene is set
-* Entities - unique moveable object, such as Characters or items
-* Steps - each step marks a point in time, synced across all locations.
-* Units - Unit is the smallest unit of a Synctory script. It's where dialog and actions live.
+* **Locations** - where an scene is set
+* **Entities** - unique object that can move between **Locations**, such as characters or items
+* **Steps** - each step marks a point in time, synced across all **Locations**. An **Entity** cannot be in more than one **Location** in any **Step**.
+* **Units** - Units are the atoms of a Synctory script. It's where the dialog and actions live.
 
 Have a look at the video tutorial for more on how the system works.
 
