@@ -54,8 +54,13 @@ var Step = new Class({
     },
 
     SetBottomY: function(bottomY) {
+        var biggestTop = 0;
         Array.each(this.UnitTerminals, function(unit, index){
             unit.SetBottomY(bottomY);
+            var unitTop = unit.Div.getPosition().y;
+            if (unitTop > biggestTop) {
+                biggestTop = unitTop;
+            }
         });
 
         //TODO: This is run twice for each step when initialising, check ordering
@@ -63,7 +68,7 @@ var Step = new Class({
         if (this.UnitTerminals.length == 0) {
             return;
         }
-        var height = bottomY - this.UnitTerminals[0].Div.getPosition().y;
+        var height = bottomY - biggestTop;
 
         this.Div.setStyle('height', height + 'px');
     },
