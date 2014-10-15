@@ -121,7 +121,7 @@ function LoadUnitIntoSteps(unit) {
 function ExportSynctoryFile() {
     jsonString = JSON.encode(GetSaveObject());
     var jsonBlob = new Blob([jsonString], {type: "text/plain;charset=utf-8"});
-    saveAs(jsonBlob, "blob_test.synctory");
+    saveAs(jsonBlob, title + ".synctory");
 }
 
 function GetSaveObject() {

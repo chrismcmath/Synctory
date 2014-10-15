@@ -363,6 +363,7 @@ function OnPrintByLocation() {
 }
 
 function OnExportSynctory() {
+    ExportSynctoryFile();
     //OnImportSynctory();
 }
 
@@ -630,5 +631,9 @@ function GetAllEntities() {
         entities.push.apply(entities, step.GetAllEntities());
     });
     return jQuery.unique(entities).sort();
+}
+
+function LoadInitialScripts() {
+    LoadPresetScript(JSON.parse(TUTORIAL_SCRIPT));
 }
 

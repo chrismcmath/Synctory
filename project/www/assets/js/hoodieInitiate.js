@@ -21,6 +21,7 @@ function GetPassword() {
 function OnSignUp() {
     hoodie.account.signUp(GetUsername(), GetPassword())
         .done(function (user) {
+            LoadInitialScripts();
             CheckUser();
         })
         .fail(function (user) {
@@ -60,6 +61,13 @@ function NewScript(title, author) {
         .done(function (newScript) {
             SetCurrentScript(newScript);
             OnNewScriptCreated();
+        });
+}
+
+function LoadPresetScript(script) {
+    hoodie.store.add(SCRIPT_TYPE, script)
+        .done(function (newScript) {
+            console.log('created ' + newScript);
         });
 }
 
