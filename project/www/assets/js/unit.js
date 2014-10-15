@@ -206,14 +206,19 @@ var Unit = new Class({
             emptyUnitStep.UnitTerminals.erase(this);
             emptyUnitStep.UnitTerminals.push(emptyUnit);
 
+            /* Update Conflicts for new unit */
+            emptyUnit.CheckForConflicts();
+
             /*Update Current Unit*/
             this.Steps.erase(this.Steps.getLast());
             var terminalStep = GetStepFromKey(this.GetLastStepKey());
             terminalStep.UnitTerminals.push(this);
 
             Refresh();
+            this.CheckForConflicts();
         }
     },
+
     OnGrow: function() {
         var terminalStep = GetStepFromKey(this.GetLastStepKey());
         var nextStep = this.GetNextStep();
@@ -228,6 +233,7 @@ var Unit = new Class({
             }
 
             Refresh();
+            this.CheckForConflicts();
         }
     },
 
@@ -279,10 +285,14 @@ var Unit = new Class({
         });
 
         if (entityChanged) {
-            Array.each(this.Steps, function(stepKey, index) {
-                GetStepFromKey(stepKey).CheckEntityConflict();
-            });
+            this.CheckForConflicts();
         }
+    },
+
+    CheckForConflicts: function() {
+        Array.each(this.Steps, function(stepKey, index) {
+            GetStepFromKey(stepKey).CheckEntityConflict();
+        });
     },
 
     AddConflict: function(text) {

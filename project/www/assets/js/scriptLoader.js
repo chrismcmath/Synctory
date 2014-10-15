@@ -47,6 +47,7 @@ function LoadScript(script) {
     var unitsJSON = script.units;
     LoadScriptUnits(unitsJSON);
     LoadUnitsIntoSteps();
+    CheckConflicts();
     OnLoadComplete();
 }
 
@@ -93,6 +94,12 @@ function LoadScriptUnits(unitsJSON) {
 function LoadUnitsIntoSteps() {
     Array.each(units, function(unit, index) {
         LoadUnitIntoSteps(unit);
+    });
+}
+
+function CheckConflicts() {
+    Array.each(steps, function(step, index) {
+        step.CheckEntityConflict();
     });
 }
 

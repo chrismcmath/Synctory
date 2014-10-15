@@ -269,7 +269,12 @@ function LoadLocationIntoList(location, callback) {
 
 function HideAllOverlays() {
     $('.overlay').hide();
+    RemoveDynamicButtonEvents();
     CheckCurrentState();
+}
+
+function RemoveDynamicButtonEvents() {
+    $('#confirm_rename')[0].removeEvents();
 }
 
 function OnLoadComplete() {
@@ -504,7 +509,6 @@ function Rename(title, placeholder, caps, callback) {
             if (caps) newValue = newValue.toUpperCase();
             callback(newValue);
             HideAllOverlays();
-            $('#confirm_rename')[0].removeEvents();
         } else {
             DisplayErrorMsg(["Please input a new value"]);
         }
