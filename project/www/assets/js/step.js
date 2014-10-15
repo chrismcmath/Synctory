@@ -58,7 +58,13 @@ var Step = new Class({
             unit.SetBottomY(bottomY);
         });
 
-        var height = bottomY - this.Div.getPosition().y;
+        //TODO: This is run twice for each step when initialising, check ordering
+        //NOTE: getting position from Unit, as step is unreliable (pos only gets updated after this frame)
+        if (this.UnitTerminals.length == 0) {
+            return;
+        }
+        var height = bottomY - this.UnitTerminals[0].Div.getPosition().y;
+
         this.Div.setStyle('height', height + 'px');
     },
 
