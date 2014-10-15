@@ -279,6 +279,7 @@ function RemoveDynamicButtonEvents() {
 
 function OnLoadComplete() {
     Refresh();
+    Page.initialize();
 }
 
 function Refresh() {
@@ -638,6 +639,5 @@ function GetAllEntities() {
 }
 
 function LoadInitialScripts() {
-    LoadPresetScript(JSON.parse(TUTORIAL_SCRIPT));
+    LoadPresetScript(TUTORIAL_SCRIPT);
 }
-

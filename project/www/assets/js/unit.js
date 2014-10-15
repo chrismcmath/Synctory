@@ -66,6 +66,7 @@ var Unit = new Class({
         });
         var splitButton = new Element("div", {
             html: '&#247;',
+            title: 'Split this unit (insert a new step)',
             'class': 'split_unit unit_button'
         });
         splitButton.addEvent('click', function(event){
@@ -74,6 +75,7 @@ var Unit = new Class({
         });
         var closeButton = new Element("div", {
             html: '&#9679;',
+            title: 'Delete this unit',
             'class': 'close_unit unit_button'
         });
         closeButton.addEvent('click', function(event){
@@ -91,6 +93,7 @@ var Unit = new Class({
         });
         var shrinkButton = new Element("div", {
             html: '-',
+            title: 'Shrink the unit',
             'class': 'shrink_unit unit_button'
         });
         shrinkButton.addEvent('click', function(event){
@@ -99,6 +102,7 @@ var Unit = new Class({
         });
         var growButton = new Element("div", {
             html: '+',
+            title: 'Grow the unit',
             'class': 'grow_unit unit_button'
         });
         growButton.addEvent('click', function(event){
