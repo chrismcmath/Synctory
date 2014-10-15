@@ -282,6 +282,7 @@ function OnLoadComplete() {
 }
 
 function Refresh() {
+    var prevScroll = document.body.scrollTop;
     Array.each(units, function(unit, index) {
         unit.Div.setStyle('height', null);
     });
@@ -289,6 +290,9 @@ function Refresh() {
     Array.each(steps, function(step, index) {
         step.Reposition();
     });
+
+    //NOTE: A changed height will reset the scroll
+    document.body.scrollTop = prevScroll;
 }
 
 /* TODO: Need a 'iterate from index' func
