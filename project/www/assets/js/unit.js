@@ -120,6 +120,10 @@ var Unit = new Class({
 
     MakeInactive: function() {
         this.Active = false;
+        this.Text = "";
+        this.TextDiv.value = this.Text;
+        this.Entities = [];
+
         Array.each(this.Div.getElements('.unit_activated'), function (child, index) {
             child.set({
                 styles: {
@@ -127,6 +131,14 @@ var Unit = new Class({
                 }
             });
         });
+
+        
+        if (this._HasConflict) {
+            this.RemoveConflict();
+            this.CheckForConflicts();
+        }
+
+        $(this.Div).css('background', '');
 
         /*
         var plusDiv = new Element("div", {
@@ -194,7 +206,7 @@ var Unit = new Class({
             alert("Only units with length of more than one can be shrunk.\nIf you want to make a new unit, try spliting it (÷) instead.");
         } else {
             /*Create Empty Unit*/
-            var emptyUnit = new Unit(units.length, this.LocationKey, [this.Steps.getLast()], [], "", false);
+            var emptyUnit = new Unit(UNIT_ID++, this.LocationKey, [this.Steps.getLast()], [], "", false);
             emptyUnit.CreateUnitHTML();
             emptyUnit.Div.inject(this.Div, 'after');
             this.Div.setStyle('height', null);
@@ -310,7 +322,7 @@ var Unit = new Class({
     },
 
     RemoveConflict: function(text) {
-        if (!this.Active || !this._HasConflict) return;
+        if (!this._HasConflict) return;
 
         //NOTE: Must check if other steps agree no conflict
         unit = this;
@@ -335,7 +347,6 @@ var Unit = new Class({
             background: backColour
         });
         this.TextDiv.set('styles', {
-            background: backColour,
             color: frontColour
         });
         Array.each(this.Div.getElementsByClassName('unit_divide'), function(e, index) {

@@ -505,6 +505,10 @@ input {
     overflow: hidden;
 }
 
+textarea {
+    background: transparent;
+}
+
 textarea span{
     background: white;
     color: black;

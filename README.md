@@ -40,7 +40,7 @@ Synctory uses a plethora of great libraries and frameworks. It is still an early
 * [hoodie] - awesome web-based text editor
 * [nodejitsu] - node.js hosting
 * [node.js] - evented I/O for the backend
-* [jQuery] -
+* [jQuery] - jquery.com
 * [mootools] - dependancy to be removed (one library needs translation)
 
 ## Note on Terminology <a name="terminology"></a>
