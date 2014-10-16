@@ -639,5 +639,6 @@ function GetAllEntities() {
 }
 
 function LoadInitialScripts() {
+    LoadPresetScript(EXAMPLE_SCRIPT_1);
     LoadPresetScript(TUTORIAL_SCRIPT);
 }
