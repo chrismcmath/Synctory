@@ -9,6 +9,14 @@ Synctory is a web tool for building multi-threaded narratives.
 * Uses Fountain to render printable customised scripts (for example, one type for an actor with just their scenes, another for the location director).
 * Can be utilised in any medium that allows for a degree of interactivity.
 
+## Quick Install
+Synctory is build on Hoodie's nobackend framework, so first install the dependancies described here: http://hood.ie/#installation.
+Then
+* cd project
+* npm install
+* hoodie start
+
+Clone the repo and cd to project.
 
 ## Why?
 Traditional storytelling implies a passive audience. Increasingly we've seen different artistic mediums play with parallel narratives to weave richer narrative tapestries, but they are still experienced linearly by the audience. With new technologies we now have the capability to make multi-linear narratives for large audiences. This is a vast unexplored area of storytelling potential.
