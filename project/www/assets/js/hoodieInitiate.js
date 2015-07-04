@@ -1,5 +1,5 @@
 "use strict";
-var hoodie  = new Hoodie();
+var hoodie = new Hoodie('https://synctory.appback.com');
 var SCRIPT_TYPE  = "script";
 
 function CheckUser() {
