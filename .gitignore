@@ -2,3 +2,6 @@
 project/node_modules
 project/data
 
+.local.vimrc
+tags
+
