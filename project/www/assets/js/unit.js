@@ -216,7 +216,7 @@ var Unit = new Class({
 
             /* Add to view */
             var emptyUnitStep = GetStepFromKey(emptyUnit.GetLastStepKey());
-            emptyUnitStep.LocationUnitHash[this.LocationKey] = emptyUnit;
+            emptyUnitStep.LocationUnitDict[this.LocationKey] = emptyUnit;
             emptyUnitStep.UnitTerminals.erase(this);
             emptyUnitStep.UnitTerminals.push(emptyUnit);
 

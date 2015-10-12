@@ -2,7 +2,7 @@ var Step = new Class({
     initialize: function(key, stamp) {
         this.Key = key; // not in order!
         this.Stamp = stamp;
-        this.LocationUnitHash = new Hash();
+        this.LocationUnitDict = {};
         this.UnitTerminals = [];
     },
 
@@ -33,14 +33,14 @@ var Step = new Class({
         this.Div.dispose();
 
         var key = this.Key;
-        this.LocationUnitHash.each(function(unit, location) {
+        Object.each(this.LocationUnitDict, function(unit, locationKey) {
             unit.RemoveStep(key);
         });
     },
 
     AddUnit: function(unit) {
         var locationKey = unit.LocationKey;
-        this.LocationUnitHash[locationKey] = unit;
+        this.LocationUnitDict[locationKey] = unit;
     },
 
     GetMaxBottomY: function(bottomY) {
@@ -82,12 +82,12 @@ var Step = new Class({
     RequestGrowth: function(unit) {
         // add as terminal too
         //
-        var targetedUnit = this.LocationUnitHash[unit.LocationKey];
+        var targetedUnit = this.LocationUnitDict[unit.LocationKey];
         if (targetedUnit.Active) {
             //console.log('refuse growth, next thing is active');
             return false;
         } else {
-            this.LocationUnitHash[unit.LocationKey] = unit;
+            this.LocationUnitDict[unit.LocationKey] = unit;
             targetedUnit.Div.dispose();
 
             // order imp
@@ -124,7 +124,7 @@ var Step = new Class({
 
     GetAllEntities: function() {
         var entities = [];
-        this.LocationUnitHash.each(function(unit, location) {
+        Object.each(this.LocationUnitDict, function(unit, locationKey) {
             entities.append(unit.Entities);
         });
         return entities;
@@ -148,7 +148,7 @@ var Step = new Class({
         var step = this;
         if (dupes.length > 0) {
         Array.each(dupes, function (dupe, index) {
-            step.LocationUnitHash.each(function(unit, location) {
+            Object.each(step.LocationUnitDict, function(unit, locationKey) {
                 //console.log("Dupe: " + dupe + " step: " + step.Key + " location: " + location + "unit: " + unit.Key);
                 if (unit.Entities.contains(dupe)) {
                     //console.log('has conflict');
@@ -160,7 +160,7 @@ var Step = new Class({
             });
         });
         } else {
-            step.LocationUnitHash.each(function(unit, location) {
+            Object.each(step.LocationUnitDict, function(unit, locationKey) {
                 unit.RemoveConflict();
             });
         }

@@ -1,22 +1,24 @@
 {
-  "name": "synctory",
+  "name": "Synctory",
   "version": "3.2.1",
-  "type": "app",
+  "bundleDependencies": [
+    "hoodie-plugin-appconfig",
+    "hoodie-plugin-email",
+    "hoodie-plugin-users",
+    "hoodie-server"
+  ],
   "dependencies": {
-    "hoodie-server": "^1.2.4",
-    "hoodie-plugin-appconfig": "^2.0.0",
+    "hoodie-plugin-appconfig": "^2.0.1",
     "hoodie-plugin-email": "^1.0.0",
-    "hoodie-plugin-users": "^1.0.0"
+    "hoodie-plugin-users": "^2.2.2",
+    "hoodie-server": "^4.0.2"
+  },
+  "engines": {
+    "node": ">=0.10.22"
   },
   "files": [
     "www/"
   ],
-  "engines": {
-    "node": ">=0.10.22"
-  },
-  "scripts": {
-    "start": "node node_modules/hoodie-server/bin/start"
-  },
   "hoodie": {
     "plugins": [
       "hoodie-plugin-appconfig",
@@ -24,17 +26,24 @@
       "hoodie-plugin-users"
     ]
   },
-  "description": "## Installation",
-  "_id": "my-first-hoodie@2.1.1",
-  "dist": {
-    "shasum": "83cc28f7296edeff97021d77edf03af8afd529f1",
-    "tarball": "http://registry.npmjs.org/my-first-hoodie/-/my-first-hoodie-2.1.1.tgz"
+  "scripts": {
+    "start": "node node_modules/hoodie-server/bin/start"
   },
-  "_from": "my-first-hoodie@2.1.1",
-  "_npmVersion": "1.3.14",
+  "type": "app",
+  "gitHead": "33fdb70357c415bbed56bbbd5197c805c0264294",
+  "description": "[![Dependency Status](https://david-dm.org/hoodiehq/my-first-hoodie.svg)](https://david-dm.org/hoodiehq/my-first-hoodie)",
+  "_id": "my-first-hoodie@3.2.1",
+  "_shasum": "240df30b9664e56a04bb2ba2ad26c52e5691d763",
+  "_from": "my-first-hoodie@3.2.1",
+  "_npmVersion": "2.13.0",
+  "_nodeVersion": "2.3.0",
   "_npmUser": {
-    "name": "gr2m",
-    "email": "gregor@martynus.net"
+    "name": "boennemann",
+    "email": "stephan@boennemann.me"
+  },
+  "dist": {
+    "shasum": "240df30b9664e56a04bb2ba2ad26c52e5691d763",
+    "tarball": "http://registry.npmjs.org/my-first-hoodie/-/my-first-hoodie-3.2.1.tgz"
   },
   "maintainers": [
     {
@@ -67,8 +76,6 @@
     }
   ],
   "directories": {},
-  "_shasum": "83cc28f7296edeff97021d77edf03af8afd529f1",
-  "_resolved": "https://registry.npmjs.org/my-first-hoodie/-/my-first-hoodie-2.1.1.tgz",
-  "readme": "ERROR: No README data found!",
-  "subdomain": "synctory"
+  "_resolved": "https://registry.npmjs.org/my-first-hoodie/-/my-first-hoodie-3.2.1.tgz",
+  "readme": "ERROR: No README data found!"
 }

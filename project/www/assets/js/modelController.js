@@ -198,6 +198,8 @@ function OnCopyFileClicked() {
     //console.log('OnCopyFileClicked');
 }
 
+var global_script_object;
+
 function DisplayMyScripts() {
     $('#open_overlay').show();
 
@@ -205,6 +207,8 @@ function DisplayMyScripts() {
 
     $('#script_list li').remove(":not(.permanent)");
     GetUserScripts(function (scripts) {
+        global_script_object = scripts;
+        console.log("UPDATED");
         var sortedList = sortByKey(scripts, 'updatedAt').reverse();
         Array.each(sortedList, function(script, index) {
             LoadScriptIntoList(script.title, script.updatedAt.split('T')[0], function (evt) {
@@ -274,7 +278,9 @@ function HideAllOverlays() {
 }
 
 function RemoveDynamicButtonEvents() {
-    $('#confirm_rename')[0].removeEvents();
+    if ($('#confirm_rename').length > 1) {
+        $('#confirm_rename')[0].removeEvents();
+    }
 }
 
 function OnLoadComplete() {
@@ -356,7 +362,7 @@ function OnPrintByLocation() {
             var prevUnit;
             var unitSequence = new Array();
             Array.each(steps, function(step, index) {
-                var stepUnit = step.LocationUnitHash[location.Key];
+                var stepUnit = step.LocationUnitDict[location.Key];
                 if (stepUnit != prevUnit) {
                     unitSequence.push(stepUnit);
                     prevUnit = stepUnit
@@ -436,8 +442,8 @@ function InsertNewStep(prevStepKey) {
 
     /* Load that new step with all the previous steps steps and terminals. */
     /* copy hash*/
-    prevStep.LocationUnitHash.each(function(unit, location) {
-        newStep.LocationUnitHash[location] = unit;
+    Object.each(prevStep.LocationUnitDict, function(unit, locationKey) {
+        newStep.LocationUnitDict[locationKey] = unit;
         /* Update unit*/
         unit.InsertStepAfter(newStep.Key, prevStep.Key);
     });
