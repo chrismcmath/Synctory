@@ -41,9 +41,12 @@ function OnSignIn() {
 
 function OnSignOut() {
     OnSaveScript();
-    hoodie.account.signOut().done(function (user) {
-        ResetScript();
-        CheckUser();
+    hoodie.account.signOut()
+        .done(function (user) {
+            ResetScript();
+            CheckUser();
+        }).fail(function (err) {
+            console.log("Sign Out error: " + err);
     });
 }
 

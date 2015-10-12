@@ -1,6 +1,6 @@
 {
   "name": "synctory",
-  "version": "2.1.1-16",
+  "version": "3.2.1",
   "type": "app",
   "dependencies": {
     "hoodie-server": "^1.2.4",
